@@ -1,0 +1,5 @@
+800 600
+Missile 100 500
+Person 50 500
+Gravity 10
+/* INSERT QUESTIONS HERE */
