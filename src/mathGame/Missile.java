@@ -1,5 +1,6 @@
 package mathGame;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.util.ArrayList;
 
 
@@ -26,9 +27,19 @@ public class Missile {
 		return false;
 	}
 	public void drawPath( Graphics g){}
-	public ArrayList<Integer> calcPath(){
+	public ArrayList<Point> calcPath(int inputAngle, int intialVelocity ){
 		return null;
 	}
+	public Missile(int x, int y) {
+		super();
+		this.x = x;
+		this.y = y;
+	}
+	public Missile() {
+		super();
+	}
+	
+	
 	
 	
 }
