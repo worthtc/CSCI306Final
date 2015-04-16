@@ -3,7 +3,7 @@ import java.awt.Graphics;
 
 
 public class Player {
-	int x;
-	int y;
+	private int x;
+	private int y;
 	public void draw( Graphics g ){}
 }

@@ -7,16 +7,27 @@ import javax.swing.JTextField;
 
 
 public class ControlPanel {
-	int angle;
-	JTextField angleInput;
-	JComboBox<Missile> possibleTargets;
-	JComboBox<Target> possibleMissiles;
-	JComboBox<Player> possiblePlayers;
-	JMenu fileMenu;
-	ArrayList<Question> possibleQuestions;
-	ArrayList<Missile> missileChoices;
-	ArrayList<Target> targetChoices;
-	ArrayList<Player> playerChoices;
+	private int angle;
+	private JTextField angleInput;
+	private JComboBox<Missile> possibleTargets;
+	private JComboBox<Target> possibleMissiles;
+	private JComboBox<Player> possiblePlayers;
+	private JMenu fileMenu;
+	private ArrayList<Question> possibleQuestions;
+	private ArrayList<Missile> missileChoices;
+	private ArrayList<Target> targetChoices;
+	private ArrayList<Player> playerChoices;
 	
-	public void askQuestion(){}
+	public Question askQuestion(){
+		return new Question("","");
+	}
+	
+	public ControlPanel() {
+		super();
+		possibleQuestions = new ArrayList<Question>();
+	}
+
+	public void addQuestion( Question newQuestion ){
+		possibleQuestions.add(newQuestion);
+	}
 }

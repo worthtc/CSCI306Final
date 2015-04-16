@@ -3,9 +3,9 @@ import java.awt.Graphics;
 
 
 public class Target {
-	int x;
-	int y;
-	int width;
-	int height;
+	private int x;
+	private int y;
+	private int width;
+	private int height;
 	public void draw( Graphics g ){}
 }

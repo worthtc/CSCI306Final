@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 
 public class Missile {
-	int x;
-	int y;
+	private int x;
+	private int y;
 	
 	public void launchMissile( int inputAngle ){}
 	public void draw( Graphics g ){}
