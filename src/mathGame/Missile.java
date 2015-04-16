@@ -7,9 +7,22 @@ public class Missile {
 	int x;
 	int y;
 	
+	public int getX() {
+		return x;
+	}
+	public void setX(int x) {
+		this.x = x;
+	}
+	public int getY() {
+		return y;
+	}
+	public void setY(int y) {
+		this.y = y;
+	}
 	public void launchMissile( int inputAngle ){}
 	public void draw( Graphics g ){}
-	public boolean isColliding( Target boardTarget ){
+	public boolean isColliding( Target boardTarget){
+		
 		return false;
 	}
 	public void drawPath( Graphics g){}
