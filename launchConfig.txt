@@ -3,3 +3,11 @@ Missile 100 500
 Person 50 500
 Gravity 10
 /* INSERT QUESTIONS HERE */
+Question: Which trigonometric function can equal or be greater than 1.000? 
+Answer:Tangent
+Question:Which set of angles has the same trigonometric ratio? 
+Answer:Sin 30 and cos 60 
+Question:If Sin angle A = 358, them m angle A = 21°? true or false
+Answer:True
+Question: The sum of the sine of an angle and the cosine of its complement is always greater than 1.000? true or false
+Answer:False
