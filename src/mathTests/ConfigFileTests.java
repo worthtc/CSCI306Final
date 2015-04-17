@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import mathGame.BadConfigFormatException;
 import mathGame.MathAngleAndFunTimesGUI;
+import mathGame.Question;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -49,5 +50,13 @@ public class ConfigFileTests {
 		Point ms = game.getMissileStart();
 		assertEquals(ps, new Point(50, 500));
 		assertEquals(ms, new Point(100, 500));
+	}
+	
+	@Test
+	public void testQuestionList(){
+		Question q1 = new Question("Which trigonometric function can equal or be greater than 1.000?", "Tangent" );
+		Question q2 = new Question("If Sin angle A = 0.358, then does angle A = 21°? True or False", "True" );
+		assertTrue(game.getControlGUI().getPossibleQuestions().contains(q1));
+		assertTrue(game.getControlGUI().getPossibleQuestions().contains(q2));
 	}
 }

@@ -28,7 +28,7 @@ public class Missile {
 	}
 	public void drawPath( Graphics g){}
 	public ArrayList<Point> calcPath(int inputAngle, int intialVelocity ){
-		return null;
+		return new ArrayList<Point>();
 	}
 	public Missile(int x, int y) {
 		super();

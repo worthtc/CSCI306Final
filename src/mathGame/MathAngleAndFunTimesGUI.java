@@ -15,12 +15,14 @@ public class MathAngleAndFunTimesGUI {
 	
 	public MathAngleAndFunTimesGUI(String filename){
 		this.filename = filename;
+		missileTypes = new ArrayList<String>();
+		controlGUI = new ControlPanel();
 	}
 	
 	public void loadConfigFiles(){}
 	
 	public ArrayList<String> getMissileTypes(){
-		return null;
+		return missileTypes;
 	}
 	
 	public double getGravity(){
@@ -34,4 +36,10 @@ public class MathAngleAndFunTimesGUI {
 	public Point getMissileStart(){
 		return missileStart;
 	}
+
+	public ControlPanel getControlGUI() {
+		return controlGUI;
+	}
+	
+	
 }

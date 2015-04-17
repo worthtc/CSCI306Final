@@ -30,4 +30,10 @@ public class ControlPanel {
 	public void addQuestion( Question newQuestion ){
 		possibleQuestions.add(newQuestion);
 	}
+
+	public ArrayList<Question> getPossibleQuestions() {
+		return possibleQuestions;
+	}
+	
+	
 }
