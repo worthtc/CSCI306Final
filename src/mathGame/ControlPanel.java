@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
@@ -45,6 +46,24 @@ public class ControlPanel extends JPanel{
 		//JLabel angleLabel = new JLabel("Input Angle:");
 		angleInput = new JTextField(5);
 		JButton angleInputButton = new JButton("Enter");
+		class EnterListener implements ActionListener {
+			public void actionPerformed(ActionEvent e)
+			{
+				try{
+					String input = angleInput.getText();
+					angle = Integer.parseInt(input);
+					if( !(angle >= 0) || !(angle <= 360)){
+						JOptionPane.showMessageDialog(null, "Please enter a whole number between 0 and 360", "Invalid input", JOptionPane.INFORMATION_MESSAGE);
+						return;
+					}
+				}
+				catch( NumberFormatException exc){
+					JOptionPane.showMessageDialog(null, "Please enter a whole number between 0 and 360", "Invalid input", JOptionPane.INFORMATION_MESSAGE);
+					return;
+				}
+			}
+		}
+		angleInputButton.addActionListener(new EnterListener());
 		fileMenuBar = new JMenuBar();
 		class ExitListener implements ActionListener {
 			public void actionPerformed(ActionEvent e)
@@ -62,6 +81,7 @@ public class ControlPanel extends JPanel{
 		JPanel playerPanel = new JPanel();
 		//playerPanel.add(playersLabel);
 		playerPanel.setBorder(new TitledBorder(new EtchedBorder(), "Players"));
+		//possiblePlayers = createPlayersCombo();
 		playerPanel.add(possiblePlayers);
 		this.add(playerPanel);
 		
@@ -84,7 +104,15 @@ public class ControlPanel extends JPanel{
 		anglePanel.add(angleInputButton);
 		this.add(anglePanel);
 	}
-
+	private  JComboBox<Player> createPlayersCombo()  {
+		return new JComboBox<Player>();
+	}
+	private  JComboBox<Missile> createMissleCombo()  {
+		return new JComboBox<Missile>();
+	}
+	private  JComboBox<Target> createTargetCombo()  {
+		return new JComboBox<Target>();
+	}
 	public void addQuestion( Question newQuestion ){
 		possibleQuestions.add(newQuestion);
 	}
@@ -96,6 +124,11 @@ public class ControlPanel extends JPanel{
 	public JMenuBar getFileMenuBar() {
 		return fileMenuBar;
 	}
+
+	public int getAngle() {
+		return angle;
+	}
+	
 	
 	
 	
