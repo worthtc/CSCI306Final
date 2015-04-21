@@ -22,14 +22,14 @@ public class Missile {
 	public void setY(int y) {
 		this.y = y;
 	}
-	public void launchMissile( int inputAngle ){}
+	public void launchMissile( double inputAngle ){}
 	public void draw( Graphics g ){}
 	public boolean isColliding( Target boardTarget){
 		
 		return false;
 	}
 	public void drawPath( Graphics g){}
-	public ArrayList<Point> calcPath(int inputAngle, int intialVelocity ){
+	public ArrayList<Point> calcPath(double inputAngle, int intialVelocity ){
 		int nextX = this.x;
 		int nextY = this.y;
 		double angleRadians = Math.toRadians(inputAngle); //Convert our angle to radians

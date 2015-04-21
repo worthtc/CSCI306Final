@@ -18,7 +18,7 @@ import javax.swing.border.TitledBorder;
 
 
 public class ControlPanel extends JPanel{
-	private int angle;
+	private double angle;
 	private JTextField angleInput;
 	private JComboBox<Target> possibleTargets;
 	private JComboBox<Missile> possibleMissiles;
@@ -51,14 +51,14 @@ public class ControlPanel extends JPanel{
 			{
 				try{
 					String input = angleInput.getText();
-					angle = Integer.parseInt(input);
+					angle = Double.parseDouble(input);
 					if( !(angle >= 0) || !(angle <= 360)){
-						JOptionPane.showMessageDialog(null, "Please enter a whole number between 0 and 360", "Invalid input", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Please enter a number between 0 and 360", "Invalid input", JOptionPane.INFORMATION_MESSAGE);
 						return;
 					}
 				}
 				catch( NumberFormatException exc){
-					JOptionPane.showMessageDialog(null, "Please enter a whole number between 0 and 360", "Invalid input", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Please enter a number between 0 and 360", "Invalid input", JOptionPane.INFORMATION_MESSAGE);
 					return;
 				}
 			}
@@ -125,7 +125,7 @@ public class ControlPanel extends JPanel{
 		return fileMenuBar;
 	}
 
-	public int getAngle() {
+	public double getAngle() {
 		return angle;
 	}
 	
