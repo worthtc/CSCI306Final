@@ -2,10 +2,14 @@
 Missile:100:500
 MissileType:Axe
 MissileType:Lightning Bolt
+MissileType:Arrow
 Person:50:500
 PersonType:Lumber Jack
 PersonType:Wizzzzzerd
-Target:(FILL IN)
+PersonType:Archer
+Target:Tree
+Target:Dragon
+Target:Target
 TargetType:
 Gravity:10
 Question:Which trigonometric function can equal or be greater than 1.000? 

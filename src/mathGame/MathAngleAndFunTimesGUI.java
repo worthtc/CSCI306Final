@@ -125,7 +125,7 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 	}
 	
 	public static void main(String[] args){
-		MathAngleAndFunTimesGUI game = new MathAngleAndFunTimesGUI("THIS GAME IS FUN!");
+		MathAngleAndFunTimesGUI game = new MathAngleAndFunTimesGUI("launchConfig.txt");
 		
 	}
 }
