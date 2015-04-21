@@ -45,8 +45,9 @@ public class QuestionTests {
 		int numQ2 = 0;
 		for( int i = 0; i < 1000; i++ ){
 			askedQuestion = questionAsker.askQuestion();
-			
-			assertTrue(questionAsker.askQuestion().checkQuestion(""));
+			Boolean q = askedQuestion.checkAnswer("");
+			System.out.println(q);
+			assertTrue(askedQuestion.checkAnswer(""));
 			if( questionAsker.askQuestion().checkQuestion("") == true ){
 				numQ1++;
 				numQ2++;
