@@ -5,13 +5,13 @@ public class Question {
 	private String questionText;
 	
 	public boolean checkAnswer( String answer){
-		if(answer == this.answer){
+		if(answer.equals(this.answer)){
 			return true;
 		}
 		return false;
 	}
 	public boolean checkQuestion( String q){
-		if(q == this.questionText){
+		if(q.equals(this.questionText)){
 			return true;
 		}
 		return false;
