@@ -25,7 +25,11 @@ public class Missile {
 	public void launchMissile( double inputAngle ){}
 	public void draw( Graphics g ){}
 	public boolean isColliding( Target boardTarget){
-		
+		if (x >= boardTarget.getx() && x <= boardTarget.getx() + boardTarget.getwidth()){
+			if (y >= boardTarget.gety() && y <= boardTarget.gety() + boardTarget.getheight()){
+				return true;
+			}
+		}
 		return false;
 	}
 	public void drawPath( Graphics g){}
