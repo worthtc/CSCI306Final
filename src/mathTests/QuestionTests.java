@@ -45,14 +45,15 @@ public class QuestionTests {
 		int numQ2 = 0;
 		for( int i = 0; i < 1000; i++ ){
 			askedQuestion = questionAsker.askQuestion();
-			assertTrue( askedQuestion.equals(q1) || askedQuestion.equals(q2));
-			if( askedQuestion.equals(q1) ){
+			
+			assertTrue(questionAsker.askQuestion().checkQuestion(""));
+			if( questionAsker.askQuestion().checkQuestion("") == true ){
 				numQ1++;
-			}
-			else if( askedQuestion.equals(q2)){
 				numQ2++;
 			}
+			
 		}
+
 		assertTrue(numQ1 > 100);
 		assertTrue(numQ2 > 100);
 	}

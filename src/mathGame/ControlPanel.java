@@ -62,7 +62,7 @@ public class ControlPanel extends JPanel{
 		JPanel playerPanel = new JPanel();
 		//playerPanel.add(playersLabel);
 		playerPanel.setBorder(new TitledBorder(new EtchedBorder(), "Players"));
-		possiblePlayers = createPlayersCombo();
+		//possiblePlayers = createPlayersCombo();
 		playerPanel.add(possiblePlayers);
 		this.add(playerPanel);
 		
