@@ -31,7 +31,7 @@ public class CollisionTest {
 	@Test
 	public void CollisionWidthTrue(){
 		int x = 40;
-		int y= 35;
+		int y= 5;
 		A3.setX(x);
 		A3.setY(y);
 		targ.setwidth(x);
@@ -94,7 +94,7 @@ public class CollisionTest {
 	@Test
 	public void CollisionHeightFail(){
 		int x = 40;
-		int y= 35;
+		int y= 66;
 		A3.setX(x);
 		A3.setY(y);
 		targ.setwidth(89);
@@ -104,12 +104,12 @@ public class CollisionTest {
 	}
 	@Test
 	public void CollisionWidthFail(){
-		int x = 40;
-		int y= 35;
+		int x = 30;
+		int y= 30;
 		A3.setX(x);
 		A3.setY(y);
-		targ.setwidth(89);
-		targ.setheight(65);
+		targ.setwidth(20);
+		targ.setheight(40);
 		assertFalse(A3.isColliding(targ));
 		
 	}
