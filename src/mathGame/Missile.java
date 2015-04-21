@@ -41,21 +41,12 @@ public class Missile {
 		pathList.add(nextPoint);
 		//We continue to add points to the list until our missile goes off of the screen 
 		//We can just test for the screenX and Y if we want the missile to be able to go above y=0
-		int count = 0;
 		while( nextPoint.x >= 0 && nextPoint.x <= screenX && nextPoint.y >= 0 && nextPoint.y <= screenY){
 			time += 0.1; //Increment our timesteps by 0.1 seconds. This value can be changed if needed
-			count++;
 			//Calculate X and Y for the next point according to the equation X = X_0 + v_0*t + (1/2)*a*t^2
 			nextX =(int) (this.x + velocityX*time); 
 			nextY = (int) (this.y - velocityY*time + (0.5)*gravity*time*time); //Here we subtract velocityY*time as velocityY is upwards which is negative
 			nextPoint = new Point(nextX, nextY);
-			if( count == 40 ){
-				System.out.println(this.y);
-				System.out.println(velocityY);
-				System.out.println(time);
-				System.out.println(gravity);
-				System.out.println(nextPoint);
-			}
 			pathList.add(nextPoint);
 		}
 		return pathList;

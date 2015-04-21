@@ -1,9 +1,13 @@
 package mathGame;
 
+import java.awt.BorderLayout;
 import java.awt.Point;
 import java.util.ArrayList;
 
-public class MathAngleAndFunTimesGUI {
+import javax.swing.JFrame;
+
+
+public class MathAngleAndFunTimesGUI extends JFrame{
 	private ControlPanel controlGUI;
 	private DisplayPanel displayPanel;
 	private String filename;
@@ -14,9 +18,17 @@ public class MathAngleAndFunTimesGUI {
 	private Point missileStart;
 	
 	public MathAngleAndFunTimesGUI(String filename){
+		this.setResizable(false);
 		this.filename = filename;
 		missileTypes = new ArrayList<String>();
 		controlGUI = new ControlPanel();
+		setSize(800, 600);
+		setTitle("Math and Angles Fun Times!");// Note: title is a work in progress
+		setLayout(new BorderLayout());
+		add(controlGUI, BorderLayout.NORTH);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setJMenuBar(controlGUI.getFileMenuBar());
+		setVisible(true);
 	}
 	
 	public void loadConfigFiles(){}
@@ -41,5 +53,8 @@ public class MathAngleAndFunTimesGUI {
 		return controlGUI;
 	}
 	
-	
+	public static void main(String[] args){
+		MathAngleAndFunTimesGUI game = new MathAngleAndFunTimesGUI("THIS GAME IS FUN!");
+		
+	}
 }
