@@ -1,7 +1,13 @@
 800 600
-Missile 100 500
-Person 50 500
-Gravity 10
+Missile:100:500
+MissileType:Axe
+MissileType:Lightning Bolt
+Person:50:500
+PersonType:Lumber Jack
+PersonType:Wizzzzzerd
+Target:(FILL IN)
+TargetType:
+Gravity:10
 Question:Which trigonometric function can equal or be greater than 1.000? 
 Answer:Tangent
 Question:Which set of angles has the same trigonometric ratio? 
