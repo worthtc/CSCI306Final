@@ -45,6 +45,12 @@ public class ControlPanel extends JPanel{
 		//JLabel angleLabel = new JLabel("Input Angle:");
 		angleInput = new JTextField(5);
 		JButton angleInputButton = new JButton("Enter");
+		class EnterListener implements ActionListener {
+			public void actionPerformed(ActionEvent e)
+			{
+				System.exit(0);
+			}
+		}
 		fileMenuBar = new JMenuBar();
 		class ExitListener implements ActionListener {
 			public void actionPerformed(ActionEvent e)
