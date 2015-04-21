@@ -25,7 +25,11 @@ public class ConfigFileTests {
 	public void testConfigFormatException(){
 		//Assure that bad config errors are thrown when appropriate
 		game = new MathAngleAndFunTimesGUI("badConfig.txt");
-		game.loadConfigFiles();
+		try{
+			game.loadConfigFiles();
+		}catch(BadConfigFormatException e){
+			System.out.println(e);
+		}
 	}
 	
 	@Test

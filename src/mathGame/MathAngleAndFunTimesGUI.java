@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 import javax.swing.JFrame;
 
-
+@SuppressWarnings("serial")
 public class MathAngleAndFunTimesGUI extends JFrame{
 	private ControlPanel controlGUI;
 	private DisplayPanel displayPanel;
@@ -76,7 +76,20 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 					break;
 				case "Person":
 					break;
+				case "PersonType":
+					break;
 				case "Gravity":
+					if(lineParse.length > 2){
+						inf.close();
+						throw new BadConfigFormatException("Gravity must be followed by exactly one string, and that string must contain a double.");
+					}
+					try{
+						gravity = Double.parseDouble(lineParse[1]);
+					}catch(NumberFormatException e){
+						System.out.println(e);
+						inf.close();
+						throw new BadConfigFormatException("The value after Gravity was not a double!");
+					}
 					break;
 				case "Question":
 					break;
