@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
@@ -48,9 +49,21 @@ public class ControlPanel extends JPanel{
 		class EnterListener implements ActionListener {
 			public void actionPerformed(ActionEvent e)
 			{
-				System.exit(0);
+				try{
+					String input = angleInput.getText();
+					angle = Integer.parseInt(input);
+					if( !(angle >= 0) || !(angle <= 360)){
+						JOptionPane.showMessageDialog(null, "Please enter a whole number between 0 and 360", "Invalid input", JOptionPane.INFORMATION_MESSAGE);
+						return;
+					}
+				}
+				catch( NumberFormatException exc){
+					JOptionPane.showMessageDialog(null, "Please enter a whole number between 0 and 360", "Invalid input", JOptionPane.INFORMATION_MESSAGE);
+					return;
+				}
 			}
 		}
+		angleInputButton.addActionListener(new EnterListener());
 		fileMenuBar = new JMenuBar();
 		class ExitListener implements ActionListener {
 			public void actionPerformed(ActionEvent e)
@@ -92,22 +105,13 @@ public class ControlPanel extends JPanel{
 		this.add(anglePanel);
 	}
 	private  JComboBox<Player> createPlayersCombo()  {
-		
-		
-		
-		return null;
+		return new JComboBox<Player>();
 	}
 	private  JComboBox<Missile> createMissleCombo()  {
-		
-		
-		
-		return null;
+		return new JComboBox<Missile>();
 	}
 	private  JComboBox<Target> createTargetCombo()  {
-	
-	
-	
-	return null;
+		return new JComboBox<Target>();
 	}
 	public void addQuestion( Question newQuestion ){
 		possibleQuestions.add(newQuestion);
@@ -120,6 +124,11 @@ public class ControlPanel extends JPanel{
 	public JMenuBar getFileMenuBar() {
 		return fileMenuBar;
 	}
+
+	public int getAngle() {
+		return angle;
+	}
+	
 	
 	
 	
