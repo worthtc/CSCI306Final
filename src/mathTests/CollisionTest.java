@@ -59,7 +59,6 @@ public class CollisionTest {
 		targ.setwidth(89);
 		targ.setheight(y);
 		assertTrue(A3.isColliding(targ));
-		
 	}
 	@Test
 	public void CollsionTestFail(){
