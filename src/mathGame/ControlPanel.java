@@ -62,6 +62,7 @@ public class ControlPanel extends JPanel{
 		JPanel playerPanel = new JPanel();
 		//playerPanel.add(playersLabel);
 		playerPanel.setBorder(new TitledBorder(new EtchedBorder(), "Players"));
+		possiblePlayers = createPlayersCombo();
 		playerPanel.add(possiblePlayers);
 		this.add(playerPanel);
 		
@@ -84,7 +85,24 @@ public class ControlPanel extends JPanel{
 		anglePanel.add(angleInputButton);
 		this.add(anglePanel);
 	}
-
+	private  JComboBox<Player> createPlayersCombo()  {
+		
+		
+		
+		return null;
+	}
+	private  JComboBox<Missile> createMissleCombo()  {
+		
+		
+		
+		return null;
+	}
+	private  JComboBox<Target> createTargetCombo()  {
+	
+	
+	
+	return null;
+	}
 	public void addQuestion( Question newQuestion ){
 		possibleQuestions.add(newQuestion);
 	}
