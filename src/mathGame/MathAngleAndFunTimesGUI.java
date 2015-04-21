@@ -23,7 +23,7 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 		missileTypes = new ArrayList<String>();
 		controlGUI = new ControlPanel();
 		setSize(800, 600);
-		setTitle("Math and Angles Fun Times!");// Note: title is a work in progress
+		setTitle("Math and Angle Fun Times!");// Note: title is a work in progress
 		setLayout(new BorderLayout());
 		add(controlGUI, BorderLayout.NORTH);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
