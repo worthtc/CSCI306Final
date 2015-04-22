@@ -22,14 +22,10 @@ public class ConfigFileTests {
 	}
 	
 	@Test (expected = BadConfigFormatException.class)
-	public void testConfigFormatException(){
+	public void testConfigFormatException() throws BadConfigFormatException{
 		//Assure that bad config errors are thrown when appropriate
-		game = new MathAngleAndFunTimesGUI("badConfig.txt");
-		try{
-			game.loadConfigFiles();
-		}catch(BadConfigFormatException e){
-			System.out.println(e);
-		}
+		MathAngleAndFunTimesGUI game2 = new MathAngleAndFunTimesGUI();
+		game2.MAAFTGUITestConstructor("badConfig.txt");
 	}
 	
 	@Test
@@ -37,14 +33,14 @@ public class ConfigFileTests {
 		//Assure that the correct missile name strings were loaded
 		ArrayList<String> name = game.getMissileTypes();
 		assertTrue(name.contains("Axe"));
-		assertTrue(name.contains("Magic Bolt"));
+		assertTrue(name.contains("Lightning Bolt"));
 	}
 	
 	@Test
 	public void testGravity(){
 		//Assure that the gravitational constant for our game was loaded correctly
 		double grav = game.getGravity();
-		assertEquals(grav, GRAVITY, .01);
+		assertEquals(GRAVITY, grav, .01);
 	}
 	
 	@Test
@@ -60,7 +56,18 @@ public class ConfigFileTests {
 	public void testQuestionList(){
 		Question q1 = new Question("Which trigonometric function can equal or be greater than 1.000?", "Tangent" );
 		Question q2 = new Question("If Sin angle A = 0.358, then does angle A = 21°? True or False", "True" );
-		assertTrue(game.getControlGUI().getPossibleQuestions().contains(q1));
-		assertTrue(game.getControlGUI().getPossibleQuestions().contains(q2));
+		boolean check1 = false;
+		boolean check2 = false;
+		ArrayList<Question> temp = game.getControlGUI().getPossibleQuestions();
+		for(Question q : game.getControlGUI().getPossibleQuestions()){
+			if(q.getQuestionText().equals(q1.getQuestionText()) && q.getAnswerText().equals(q1.getAnswerText())){
+				check1 = true;
+			}
+			else if(q.getQuestionText().equals(q2.getQuestionText()) && q.getAnswerText().equals(q2.getAnswerText())){
+				check2 = true;
+			}
+		}
+		assertTrue(check1);
+		assertTrue(check2);
 	}
 }

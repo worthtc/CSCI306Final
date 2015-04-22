@@ -22,5 +22,11 @@ public class Question {
 		this.questionText = questionText;
 	}
 	
+	public String getQuestionText(){
+		return questionText;
+	}
 	
+	public String getAnswerText(){
+		return answer;
+	}
 }

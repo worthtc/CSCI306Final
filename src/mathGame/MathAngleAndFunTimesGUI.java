@@ -15,6 +15,8 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 	private DisplayPanel displayPanel;
 	private String filename;
 	private ArrayList<String> missileTypes;
+	private ArrayList<String> personTypes;
+	private ArrayList<String> targetTypes;
 	
 	private double gravity; //Could be an int, though equally as functional as a double and allows for more complex gravity if desired.
 	private int screenX;
@@ -22,16 +24,39 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 	private Point personStart;
 	private Point missileStart;
 	
+	public MathAngleAndFunTimesGUI(){
+		//basic constructor for testing
+	}
+	
 	public MathAngleAndFunTimesGUI(String filename){
 		this.setResizable(false);
 		this.filename = filename;
+		missileTypes = new ArrayList<String>();
+		personTypes = new ArrayList<String>();
+		targetTypes = new ArrayList<String>();
+		controlGUI = new ControlPanel();
 		try{
 			loadConfigFiles();
 		}catch(BadConfigFormatException e){
 			System.out.println(e);
 		}
+		setSize(screenX, screenY);
+		setTitle("Math and Angles Fun Times!");// Note: title is a work in progress
+		setLayout(new BorderLayout());
+		add(controlGUI, BorderLayout.NORTH);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setJMenuBar(controlGUI.getFileMenuBar());
+		setVisible(true);
+	}
+	
+	public void MAAFTGUITestConstructor(String filename) throws BadConfigFormatException{
+		this.setResizable(false);
+		this.filename = filename;
 		missileTypes = new ArrayList<String>();
+		personTypes = new ArrayList<String>();
+		targetTypes = new ArrayList<String>();
 		controlGUI = new ControlPanel();
+		loadConfigFiles();
 		setSize(screenX, screenY);
 		setTitle("Math and Angles Fun Times!");// Note: title is a work in progress
 		setLayout(new BorderLayout());
@@ -66,6 +91,7 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 						inf.close();
 						throw new BadConfigFormatException("Missile cannot be given more than two coordinates!");
 					}
+					missileStart = new Point(Integer.parseInt(lineParse[1]), Integer.parseInt(lineParse[2]));
 					break;
 				case "MissileType":
 					if(lineParse.length > 2){
@@ -75,8 +101,18 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 					missileTypes.add(lineParse[1]);
 					break;
 				case "Person":
+					if(lineParse.length > 3){
+						inf.close();
+						throw new BadConfigFormatException("Person cannot have more than two coordinates!");
+					}
+					personStart = new Point(Integer.parseInt(lineParse[1]),Integer.parseInt(lineParse[2]));
 					break;
 				case "PersonType":
+					if(lineParse.length > 2){
+						inf.close();
+						throw new BadConfigFormatException("PersonType lines cannot be followed by more than one string name!" + lineParse[1] + " " + lineParse[2]);
+					}
+					personTypes.add(lineParse[1]);
 					break;
 				case "Gravity":
 					if(lineParse.length > 2){
@@ -91,8 +127,33 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 						throw new BadConfigFormatException("The value after Gravity was not a double!");
 					}
 					break;
-				case "Question":
+				case "Target":
+					if(lineParse.length > 2){
+						inf.close();
+						throw new BadConfigFormatException("Can't have more than one name for a target!");
+					}
+					targetTypes.add(lineParse[1]);
 					break;
+				case "Question":
+					if(lineParse.length > 2){
+						inf.close();
+						throw new BadConfigFormatException("Cannot have more than one question part!");
+					}
+					String ans = inf.nextLine();
+					String[] answer = ans.split(":");
+					if(!answer[0].equals("Answer")){
+						inf.close();
+						throw new BadConfigFormatException("Questions must be followed by Answers!");
+					}
+					if(answer.length > 2){
+						inf.close();
+						throw new BadConfigFormatException("Answers can't have more than one text body!");
+					}
+					controlGUI.addQuestion(new Question(lineParse[1], answer[1]));
+					break;
+				case "Answer":
+					inf.close();
+					throw new BadConfigFormatException("Answers must only follow questions!");
 				default:
 					inf.close();
 					throw new BadConfigFormatException("The keyword " + lineParse[0] + " is not a valid keyword to start a line.");
