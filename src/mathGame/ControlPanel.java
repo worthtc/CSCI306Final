@@ -2,6 +2,9 @@ package mathGame;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -20,9 +23,9 @@ import javax.swing.border.TitledBorder;
 public class ControlPanel extends JPanel{
 	private double angle;
 	private JTextField angleInput;
-	private JComboBox<Target> possibleTargets;
-	private JComboBox<Missile> possibleMissiles;
-	private JComboBox<Player> possiblePlayers;
+	private JComboBox<String> possibleTargets;
+	private JComboBox<String> possibleMissiles;
+	private JComboBox<String> possiblePlayers;
 	private JMenuBar fileMenuBar;
 	private ArrayList<Question> possibleQuestions;
 	private ArrayList<Missile> missileChoices;
@@ -37,11 +40,11 @@ public class ControlPanel extends JPanel{
 		super();
 		possibleQuestions = new ArrayList<Question>();
 		//JLabel targetLabel = new JLabel("Targets:");
-		possibleTargets = new JComboBox<Target>();
+		possibleTargets = new JComboBox<String>();
 		//JLabel missilesLabel = new JLabel("Missiles");
-		possibleMissiles = new JComboBox<Missile>();
+		possibleMissiles = new JComboBox<String>();
 		//JLabel playersLabel = new JLabel("Characters");
-		possiblePlayers = new JComboBox<Player>();
+		possiblePlayers = new JComboBox<String>();
 		JMenu fileMenu = new JMenu("File");
 		//JLabel angleLabel = new JLabel("Input Angle:");
 		angleInput = new JTextField(5);
@@ -81,18 +84,20 @@ public class ControlPanel extends JPanel{
 		JPanel playerPanel = new JPanel();
 		//playerPanel.add(playersLabel);
 		playerPanel.setBorder(new TitledBorder(new EtchedBorder(), "Players"));
-		//possiblePlayers = createPlayersCombo();
+		possiblePlayers = createPlayersCombo();
 		playerPanel.add(possiblePlayers);
 		this.add(playerPanel);
 		
 		JPanel missilePanel = new JPanel();
 		//missilePanel.add(missilesLabel);
 		missilePanel.setBorder(new TitledBorder(new EtchedBorder(), "Missiles"));
+		possibleMissiles = createMissleCombo();
 		missilePanel.add(possibleMissiles);
 		this.add(missilePanel);
 		
 		JPanel targetPanel = new JPanel();
 		//targetPanel.add(targetLabel);
+		possibleTargets = createTargetCombo();
 		targetPanel.add(possibleTargets);
 		targetPanel.setBorder(new TitledBorder(new EtchedBorder(), "Targets"));
 		this.add(targetPanel);
@@ -104,14 +109,37 @@ public class ControlPanel extends JPanel{
 		anglePanel.add(angleInputButton);
 		this.add(anglePanel);
 	}
-	private  JComboBox<Player> createPlayersCombo()  {
-		return new JComboBox<Player>();
+	private  JComboBox<String> createPlayersCombo()  {
+		String [] lines;
+		lines = readFile("Players.txt");
+		possiblePlayers.removeAllItems();
+		
+		for(String s : lines){
+			possiblePlayers.addItem(s);
+		}
+		return possiblePlayers;
 	}
-	private  JComboBox<Missile> createMissleCombo()  {
-		return new JComboBox<Missile>();
+	private  JComboBox<String> createMissleCombo()  {
+		String [] lines;
+		lines = readFile("Missile.txt");
+		possibleMissiles.removeAllItems();
+		
+		for(String s : lines){
+			possibleMissiles.addItem(s);
+		}
+		return possibleMissiles;
+		
 	}
-	private  JComboBox<Target> createTargetCombo()  {
-		return new JComboBox<Target>();
+	private  JComboBox<String> createTargetCombo()  {
+		String [] lines;
+		lines = readFile("Targets.txt");
+		possibleTargets.removeAllItems();
+		
+		for(String s : lines){
+			possibleTargets.addItem(s);
+		}
+		return possibleTargets;
+		
 	}
 	public void addQuestion( Question newQuestion ){
 		possibleQuestions.add(newQuestion);
@@ -129,7 +157,21 @@ public class ControlPanel extends JPanel{
 		return angle;
 	}
 	
-	
+	@SuppressWarnings("resource")
+	private String[] readFile(String fname) {
+		  ArrayList<String> arr = new ArrayList<>();
+		  try {
+		     FileInputStream fstream = new FileInputStream(fname);
+		     BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+		     String strLine;
+		     while ((strLine = br.readLine()) != null) {
+		        arr.add(strLine);
+		     }
+		     
+		  } catch (Exception e) {
+		  }
+		  return arr.toArray(new String[arr.size()]);
+		}
 	
 	
 }
