@@ -7,9 +7,10 @@ Person:50:500
 PersonType:Lumber Jack
 PersonType:Wizzzzzerd
 PersonType:Archer
-Target:Tree
-Target:Dragon
-Target:Target
+Target:700:500:100:100
+TargetType:Tree
+TargetType:Dragon
+TargetType:Target
 Gravity:10
 Question:Which trigonometric function can equal or be greater than 1.000?
 Answer:Tangent

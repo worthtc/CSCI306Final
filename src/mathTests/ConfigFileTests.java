@@ -23,7 +23,7 @@ public class ConfigFileTests {
 	
 	@Test (expected = BadConfigFormatException.class)
 	public void testConfigFormatException() throws BadConfigFormatException{
-		//Assure that bad config errors are thrown when appropriate
+		//Assure that bad configuration errors are thrown when appropriate
 		MathAngleAndFunTimesGUI game2 = new MathAngleAndFunTimesGUI();
 		game2.MAAFTGUITestConstructor("badConfig.txt");
 	}
@@ -59,7 +59,7 @@ public class ConfigFileTests {
 		boolean check1 = false;
 		boolean check2 = false;
 		ArrayList<Question> temp = game.getControlGUI().getPossibleQuestions();
-		for(Question q : game.getControlGUI().getPossibleQuestions()){
+		for(Question q : temp){
 			if(q.getQuestionText().equals(q1.getQuestionText()) && q.getAnswerText().equals(q1.getAnswerText())){
 				check1 = true;
 			}

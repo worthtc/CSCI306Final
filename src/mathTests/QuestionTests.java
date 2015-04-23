@@ -2,11 +2,9 @@ package mathTests;
 
 import static org.junit.Assert.*;
 import mathGame.ControlPanel;
-import mathGame.MathAngleAndFunTimesGUI;
 import mathGame.Question;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class QuestionTests {

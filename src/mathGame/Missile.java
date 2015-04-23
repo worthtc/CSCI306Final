@@ -9,6 +9,7 @@ public class Missile {
 	private int y;
 	private int screenX, screenY;
 	private double gravity;
+	private String name;
 	
 	public int getX() {
 		return x;
@@ -25,8 +26,8 @@ public class Missile {
 	public void launchMissile( double inputAngle ){}
 	public void draw( Graphics g ){}
 	public boolean isColliding( Target boardTarget){
-		if (x >= boardTarget.getx() && x <= boardTarget.getx() + boardTarget.getwidth()){
-			if (y >= boardTarget.gety() && y <= boardTarget.gety() + boardTarget.getheight()){
+		if (x >= boardTarget.getX() && x <= boardTarget.getX() + boardTarget.getWidth()){
+			if (y >= boardTarget.getY() && y <= boardTarget.getY() + boardTarget.getHeight()){
 				return true;
 			}
 		}
@@ -55,10 +56,11 @@ public class Missile {
 		}
 		return pathList;
 	}
-	public Missile(int x, int y) {
+	public Missile(int x, int y, String name) {
 		super();
 		this.x = x;
 		this.y = y;
+		this.name = name;
 	}
 	public Missile() {
 		super();
@@ -72,6 +74,10 @@ public class Missile {
 	public void setGravity(double gravity) {
 		this.gravity = gravity;
 	}
+	public String getName() {
+		return name;
+	}
+	
 	
 	
 	

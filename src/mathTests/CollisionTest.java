@@ -1,12 +1,10 @@
 package mathTests;
 
 import static org.junit.Assert.*;
-import junit.framework.Assert;
 import mathGame.Missile;
 import mathGame.Target;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CollisionTest {
@@ -23,8 +21,8 @@ public class CollisionTest {
 		int y = 90;
 		A3.setX(x);
 		A3.setY(y);
-	    targ.setx(x);
-	    targ.sety(y);
+	    targ.setX(x);
+	    targ.setY(y);
 	    assertTrue(A3.isColliding(targ));
 		
 	}
@@ -34,19 +32,19 @@ public class CollisionTest {
 		int y= 5;
 		A3.setX(x);
 		A3.setY(y);
-		targ.setwidth(x);
-		targ.setheight(10);
+		targ.setWidth(x);
+		targ.setHeight(10);
 		assertTrue(A3.isColliding(targ));
 		
 	}
 	@Test
 	public void CollisionWidthTrueDiag(){
-		int x = (targ.getwidth()/2);
-		int y= targ.getheight()/2;
+		int x = (targ.getWidth()/2);
+		int y= targ.getHeight()/2;
 		A3.setX(x);
 		A3.setY(y);
-		targ.setwidth(x);
-		targ.setheight(y);
+		targ.setWidth(x);
+		targ.setHeight(y);
 		assertTrue(A3.isColliding(targ));
 		
 	}
@@ -56,8 +54,8 @@ public class CollisionTest {
 		int y= 35;
 		A3.setX(x);
 		A3.setY(y);
-		targ.setwidth(89);
-		targ.setheight(y);
+		targ.setWidth(89);
+		targ.setHeight(y);
 		assertTrue(A3.isColliding(targ));
 	}
 	@Test
@@ -66,8 +64,8 @@ public class CollisionTest {
 		int y = 88;
 		A3.setX(x);
 		A3.setY(y);
-		targ.setx(45);
-		targ.sety(50);
+		targ.setX(45);
+		targ.setY(50);
 		assertFalse(A3.isColliding(targ));
 	}
 	@Test
@@ -76,8 +74,8 @@ public class CollisionTest {
 		int y = 88;
 		A3.setX(x);
 		A3.setY(y);
-		targ.setx(x);
-		targ.sety(50);
+		targ.setX(x);
+		targ.setY(50);
 		assertFalse(A3.isColliding(targ));
 	}
 	@Test
@@ -86,8 +84,8 @@ public class CollisionTest {
 		int y = 88;
 		A3.setX(x);
 		A3.setY(y);
-		targ.setx(50);
-		targ.sety(y);
+		targ.setX(50);
+		targ.setY(y);
 		assertFalse(A3.isColliding(targ));
 	}
 	@Test
@@ -96,8 +94,8 @@ public class CollisionTest {
 		int y= 66;
 		A3.setX(x);
 		A3.setY(y);
-		targ.setwidth(89);
-		targ.setheight(65);
+		targ.setWidth(89);
+		targ.setHeight(65);
 		assertFalse(A3.isColliding(targ));
 		
 	}
@@ -107,8 +105,8 @@ public class CollisionTest {
 		int y= 30;
 		A3.setX(x);
 		A3.setY(y);
-		targ.setwidth(20);
-		targ.setheight(40);
+		targ.setWidth(20);
+		targ.setHeight(40);
 		assertFalse(A3.isColliding(targ));
 		
 	}

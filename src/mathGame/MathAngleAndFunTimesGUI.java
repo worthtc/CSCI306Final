@@ -23,6 +23,9 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 	private int screenY;
 	private Point personStart;
 	private Point missileStart;
+	private Point targetStart;
+	private int targetWidth;
+	private int targetHeight;
 	
 	public MathAngleAndFunTimesGUI(){
 		//basic constructor for testing
@@ -39,7 +42,14 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 			loadConfigFiles();
 		}catch(BadConfigFormatException e){
 			System.out.println(e);
+			//System.exit(1); //We should exit the program if the Config file is not correct, otherwise a lot of things will be null
 		}
+		Missile startMissile = new Missile((int)missileStart.getX(), (int)missileStart.getY(), missileTypes.get(0));
+		Player startPlayer = new Player((int)personStart.getX(), (int)personStart.getY(), personTypes.get(0));
+		Target startTarget = new Target((int)targetStart.getX(), (int)targetStart.getY(), targetWidth, targetHeight, targetTypes.get(0));
+		displayPanel = new DisplayPanel(startMissile, startPlayer, startTarget );
+		controlGUI.setDisplay(displayPanel);
+		controlGUI.setupGUI(missileTypes, personTypes, targetTypes);
 		setSize(screenX, screenY);
 		setTitle("Math and Angles Fun Times!");// Note: title is a work in progress
 		setLayout(new BorderLayout());
@@ -47,7 +57,6 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setJMenuBar(controlGUI.getFileMenuBar());
 		setVisible(true);
-		missileTypes.add("Lighting Bolt");
 	}
 	
 	public void MAAFTGUITestConstructor(String filename) throws BadConfigFormatException{
@@ -58,6 +67,8 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 		targetTypes = new ArrayList<String>();
 		controlGUI = new ControlPanel();
 		loadConfigFiles();
+		controlGUI.setDisplay(displayPanel);
+		controlGUI.setupGUI(missileTypes, personTypes, targetTypes);
 		setSize(screenX, screenY);
 		setTitle("Math and Angles Fun Times!");// Note: title is a work in progress
 		setLayout(new BorderLayout());
@@ -65,7 +76,6 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setJMenuBar(controlGUI.getFileMenuBar());
 		setVisible(true);
-		missileTypes.add("Lighting Bolt");
 	}
 	
 	public void loadConfigFiles() throws BadConfigFormatException{
@@ -89,35 +99,35 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 				lineParse = currentLine.split(":");
 				switch(lineParse[0]){
 				case "Missile":
-					if(lineParse.length > 3){
+					if(lineParse.length != 3){
 						inf.close();
 						throw new BadConfigFormatException("Missile cannot be given more than two coordinates!");
 					}
 					missileStart = new Point(Integer.parseInt(lineParse[1]), Integer.parseInt(lineParse[2]));
 					break;
 				case "MissileType":
-					if(lineParse.length > 2){
+					if(lineParse.length != 2){
 						inf.close();
 						throw new BadConfigFormatException("MissileType lines cannot be followed by more than one string name!" + lineParse[1] + " " + lineParse[2]);
 					}
 					missileTypes.add(lineParse[1]);
 					break;
 				case "Person":
-					if(lineParse.length > 3){
+					if(lineParse.length != 3){
 						inf.close();
 						throw new BadConfigFormatException("Person cannot have more than two coordinates!");
 					}
 					personStart = new Point(Integer.parseInt(lineParse[1]),Integer.parseInt(lineParse[2]));
 					break;
 				case "PersonType":
-					if(lineParse.length > 2){
+					if(lineParse.length != 2){
 						inf.close();
 						throw new BadConfigFormatException("PersonType lines cannot be followed by more than one string name!" + lineParse[1] + " " + lineParse[2]);
 					}
 					personTypes.add(lineParse[1]);
 					break;
 				case "Gravity":
-					if(lineParse.length > 2){
+					if(lineParse.length != 2){
 						inf.close();
 						throw new BadConfigFormatException("Gravity must be followed by exactly one string, and that string must contain a double.");
 					}
@@ -130,14 +140,23 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 					}
 					break;
 				case "Target":
-					if(lineParse.length > 2){
+					if(lineParse.length != 5){
+						inf.close();
+						throw new BadConfigFormatException("Target cannot have more than a startX, a startY, a width, and a height!");
+					}
+					targetStart = new Point(Integer.parseInt(lineParse[1]),Integer.parseInt(lineParse[2]));
+					targetWidth = Integer.parseInt(lineParse[3]);
+					targetHeight = Integer.parseInt(lineParse[4]);
+					break;
+				case "TargetType":
+					if(lineParse.length != 2){
 						inf.close();
 						throw new BadConfigFormatException("Can't have more than one name for a target!");
 					}
 					targetTypes.add(lineParse[1]);
 					break;
 				case "Question":
-					if(lineParse.length > 2){
+					if(lineParse.length != 2){
 						inf.close();
 						throw new BadConfigFormatException("Cannot have more than one question part!");
 					}
@@ -147,7 +166,7 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 						inf.close();
 						throw new BadConfigFormatException("Questions must be followed by Answers!");
 					}
-					if(answer.length > 2){
+					if(answer.length != 2){
 						inf.close();
 						throw new BadConfigFormatException("Answers can't have more than one text body!");
 					}
@@ -187,9 +206,8 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 		return controlGUI;
 	}
 	
+	@SuppressWarnings("unused")
 	public static void main(String[] args){
-		
 		MathAngleAndFunTimesGUI game = new MathAngleAndFunTimesGUI("launchConfig.txt");
-		
 	}
 }

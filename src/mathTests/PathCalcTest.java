@@ -5,10 +5,7 @@ import static org.junit.Assert.*;
 import java.awt.Point;
 import java.util.ArrayList;
 
-import mathGame.ControlPanel;
 import mathGame.Missile;
-import mathGame.Question;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,7 +13,7 @@ public class PathCalcTest {
 	Missile testMissile;
 	@Before
 	public void setUp() throws Exception {
-		testMissile = new Missile(100, 500);
+		testMissile = new Missile(100, 500, "Arrow");
 		testMissile.setScreenX(800);
 		testMissile.setScreenY(600);
 		testMissile.setGravity(10);
