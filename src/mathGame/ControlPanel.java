@@ -31,13 +31,14 @@ public class ControlPanel extends JPanel{
 	private ArrayList<Missile> missileChoices;
 	private ArrayList<Target> targetChoices;
 	private ArrayList<Player> playerChoices;
-	
+	private MathAngleAndFunTimesGUI gui;
 	public Question askQuestion(){
 		return new Question("","");
 	}
 	
 	public ControlPanel() {
 		super();
+		gui = new MathAngleAndFunTimesGUI();
 		possibleQuestions = new ArrayList<Question>();
 		//JLabel targetLabel = new JLabel("Targets:");
 		possibleTargets = new JComboBox<String>();
@@ -110,34 +111,33 @@ public class ControlPanel extends JPanel{
 		this.add(anglePanel);
 	}
 	private  JComboBox<String> createPlayersCombo()  {
-		String [] lines;
-		lines = readFile("Players.txt");
-		possiblePlayers.removeAllItems();
 		
-		for(String s : lines){
-			possiblePlayers.addItem(s);
-		}
+		
+		
+			possiblePlayers.addItem("Lumber Jack");
+			possiblePlayers.addItem("Wizzzzzerd");
+			possiblePlayers.addItem("Archer");
+		
 		return possiblePlayers;
 	}
 	private  JComboBox<String> createMissleCombo()  {
-		String [] lines;
-		lines = readFile("Missile.txt");
-		possibleMissiles.removeAllItems();
 		
-		for(String s : lines){
-			possibleMissiles.addItem(s);
-		}
+		
+		
+			possibleMissiles.addItem("Axe");
+			possibleMissiles.addItem("Lighting Bolt");
+			possibleMissiles.addItem("Arrow");
+		
 		return possibleMissiles;
 		
 	}
 	private  JComboBox<String> createTargetCombo()  {
-		String [] lines;
-		lines = readFile("Targets.txt");
-		possibleTargets.removeAllItems();
 		
-		for(String s : lines){
-			possibleTargets.addItem(s);
-		}
+		
+			possibleTargets.addItem("Tree");
+			possibleTargets.addItem("Dragon");
+			possibleTargets.addItem("Target");
+		
 		return possibleTargets;
 		
 	}

@@ -47,6 +47,7 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setJMenuBar(controlGUI.getFileMenuBar());
 		setVisible(true);
+		missileTypes.add("Lighting Bolt");
 	}
 	
 	public void MAAFTGUITestConstructor(String filename) throws BadConfigFormatException{
@@ -64,6 +65,7 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setJMenuBar(controlGUI.getFileMenuBar());
 		setVisible(true);
+		missileTypes.add("Lighting Bolt");
 	}
 	
 	public void loadConfigFiles() throws BadConfigFormatException{
@@ -186,6 +188,7 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 	}
 	
 	public static void main(String[] args){
+		
 		MathAngleAndFunTimesGUI game = new MathAngleAndFunTimesGUI("launchConfig.txt");
 		
 	}
