@@ -52,12 +52,14 @@ public class ControlPanel extends JPanel{
 		for(Player p:playerChoices){
 			possiblePlayers.addItem(p.getName());
 		}
+		possiblePlayers.addActionListener(new ComboListener());
 		return possiblePlayers;
 	}
 	private  JComboBox<String> createMissileCombo()  {
 		for(Missile m:missileChoices){
 			possibleMissiles.addItem(m.getName());
 		}
+		possibleMissiles.addActionListener(new ComboListener());
 		return possibleMissiles;
 		
 	}
@@ -65,6 +67,7 @@ public class ControlPanel extends JPanel{
 		for(Target t:targetChoices){
 			possibleTargets.addItem(t.getName());
 		}
+		possibleTargets.addActionListener(new ComboListener());
 		return possibleTargets;
 		
 	}
@@ -120,6 +123,8 @@ public class ControlPanel extends JPanel{
 					JOptionPane.showMessageDialog(null, "Please enter a number between 0 and 360", "Invalid input", JOptionPane.INFORMATION_MESSAGE);
 					return;
 				}
+				display.setAngle(angle);
+				//display.printValues();
 			}
 		}
 		angleInputButton.addActionListener(new EnterListener());
@@ -161,4 +166,20 @@ public class ControlPanel extends JPanel{
 		anglePanel.add(angleInputButton);
 		this.add(anglePanel);
 	}
+	class ComboListener implements ActionListener {
+		public void actionPerformed(ActionEvent e)
+		{
+			if( e.getSource() == possiblePlayers ){
+				display.getCurrentPlayer().setName(possiblePlayers.getSelectedItem().toString());
+			}
+			else if( e.getSource() == possibleMissiles){
+				display.getCurrentMissile().setName(possibleMissiles.getSelectedItem().toString());
+			}
+			else if( e.getSource() == possibleTargets){
+				display.getCurrentTarget().setName(possibleTargets.getSelectedItem().toString());
+			}
+			//display.printValues();
+		}
+	}
 }
+
