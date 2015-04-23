@@ -41,21 +41,19 @@ public class QuestionTests {
 	@Test
 	public void testRandomAsk(){
 		Question askedQuestion;
-		int numQ1 = 0;
-		int numQ2 = 0;
-		for( int i = 0; i < 1000; i++ ){
-			askedQuestion = questionAsker.askQuestion();
-			Boolean q = askedQuestion.checkAnswer("");
-			System.out.println(q);
-			assertTrue(askedQuestion.checkAnswer(""));
-			if( questionAsker.askQuestion().checkQuestion("") ){
-				numQ1++;
-				numQ2++;
-			}
-			
-		}
-
-		assertTrue(numQ1 > 100);
-		assertTrue(numQ2 > 100);
+				int numQ1 = 0;
+				int numQ2 = 0;
+				for( int i = 0; i < 1000; i++ ){
+					askedQuestion = questionAsker.askQuestion();
+					assertTrue( askedQuestion.equals(q1) || askedQuestion.equals(q2));
+					if( askedQuestion.equals(q1) ){
+						numQ1++;
+					}
+					else if( askedQuestion.equals(q2)){
+						numQ2++;
+					}
+				}
+				assertTrue(numQ1 > 100);
+				assertTrue(numQ2 > 100);
 	}
 }

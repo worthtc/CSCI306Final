@@ -33,7 +33,8 @@ public class ControlPanel extends JPanel{
 	private ArrayList<Player> playerChoices;
 	
 	public Question askQuestion(){
-		return new Question("","");
+		int index = (int) (Math.random()*possibleQuestions.size());
+		return possibleQuestions.get(index);
 	}
 	
 	public ControlPanel() {
@@ -91,7 +92,7 @@ public class ControlPanel extends JPanel{
 		JPanel missilePanel = new JPanel();
 		//missilePanel.add(missilesLabel);
 		missilePanel.setBorder(new TitledBorder(new EtchedBorder(), "Missiles"));
-		possibleMissiles = createMissleCombo();
+		possibleMissiles = createMissileCombo();
 		missilePanel.add(possibleMissiles);
 		this.add(missilePanel);
 		
@@ -119,7 +120,7 @@ public class ControlPanel extends JPanel{
 		}
 		return possiblePlayers;
 	}
-	private  JComboBox<String> createMissleCombo()  {
+	private  JComboBox<String> createMissileCombo()  {
 		String [] lines;
 		lines = readFile("Missile.txt");
 		possibleMissiles.removeAllItems();
