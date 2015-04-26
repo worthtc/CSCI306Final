@@ -3,6 +3,8 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 
 public class Missile {
 	private int x;
@@ -10,7 +12,7 @@ public class Missile {
 	private int screenX, screenY;
 	private double gravity;
 	private String name;
-	
+	private ArrayList<Point> launchPoints;
 	public int getX() {
 		return x;
 	}
@@ -23,7 +25,19 @@ public class Missile {
 	public void setY(int y) {
 		this.y = y;
 	}
-	public void launchMissile( double inputAngle ){}
+	public void launchMissile(){
+		if( launchPoints == null){
+			JOptionPane.showMessageDialog(null, "You must enter an angle and velocity before launching the missile!", "Invalid input", JOptionPane.INFORMATION_MESSAGE);
+			return;
+		}
+		for( Point pathPoint: launchPoints ){
+			this.setX(pathPoint.x);
+			this.setY(pathPoint.y);
+			if( this.isColliding(boardTarget) ){
+				return;
+			}
+		}
+	}
 	public void draw( Graphics g ){}
 	public boolean isColliding( Target boardTarget){
 		if (x >= boardTarget.getX() && x <= boardTarget.getX() + boardTarget.getWidth()){
@@ -54,6 +68,7 @@ public class Missile {
 			nextPoint = new Point(nextX, nextY);
 			pathList.add(nextPoint);
 		}
+		launchPoints = pathList;
 		return pathList;
 	}
 	public Missile(int x, int y, String name) {

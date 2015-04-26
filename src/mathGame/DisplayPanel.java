@@ -5,6 +5,7 @@ public class DisplayPanel {
 	private Missile currentMissile;
 	private Player currentPlayer;
 	private double angle;
+	private double velocity;
 
 	public DisplayPanel(Missile currentMissile, Player currentPlayer, Target currentTarget) {
 		this.currentTarget = currentTarget;
@@ -33,6 +34,9 @@ public class DisplayPanel {
 	
 	public void setAngle(double angle) {
 		this.angle = angle;
+	}
+	public void setVelocity( double velocity ){
+		this.velocity = velocity;
 	}
 	/*
 	public void printValues(){

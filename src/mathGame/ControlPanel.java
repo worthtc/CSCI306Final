@@ -129,6 +129,7 @@ public class ControlPanel extends JPanel{
 					JOptionPane.showMessageDialog(null, "Please enter a number between " + minVelocity + " and " + maxVelocity, "Invalid input", JOptionPane.INFORMATION_MESSAGE);
 					return;
 				}
+				display.setVelocity(velocity);
 			}
 		}
 		velocityInputButton.addActionListener( new VelocityListener());
@@ -154,6 +155,7 @@ public class ControlPanel extends JPanel{
 				//display.printValues();
 			}
 		}
+		
 		angleInputButton.addActionListener(new EnterListener());
 		fileMenuBar = new JMenuBar();
 		class ExitListener implements ActionListener {

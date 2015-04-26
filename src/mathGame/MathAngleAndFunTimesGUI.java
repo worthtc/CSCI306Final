@@ -29,8 +29,8 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 	
 	public MathAngleAndFunTimesGUI(){
 		//basic constructor for testing
-	}
-	
+		
+	}	
 	public MathAngleAndFunTimesGUI(String filename){
 		this.setResizable(false); //Since our locations are all set pixel values we want to make sure that the screen is not resized
 		this.filename = filename;
