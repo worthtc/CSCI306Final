@@ -34,7 +34,7 @@ public class Missile {
 		return false;
 	}
 	public void drawPath( Graphics g){}
-	public ArrayList<Point> calcPath(double inputAngle, int intialVelocity ){
+	public ArrayList<Point> calcPath(double inputAngle, double intialVelocity ){
 		int nextX = this.x;
 		int nextY = this.y;
 		double angleRadians = Math.toRadians(inputAngle); //Convert our angle to radians

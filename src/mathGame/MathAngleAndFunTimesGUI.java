@@ -32,7 +32,7 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 	}
 	
 	public MathAngleAndFunTimesGUI(String filename){
-		this.setResizable(false);
+		this.setResizable(false); //Since our locations are all set pixel values we want to make sure that the screen is not resized
 		this.filename = filename;
 		missileTypes = new ArrayList<String>();
 		personTypes = new ArrayList<String>();
@@ -42,7 +42,6 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 			loadConfigFiles();
 		}catch(BadConfigFormatException e){
 			System.out.println(e);
-			//System.exit(1); //We should exit the program if the Config file is not correct, otherwise a lot of things will be null
 		}
 		Missile startMissile = new Missile((int)missileStart.getX(), (int)missileStart.getY(), missileTypes.get(0));
 		Player startPlayer = new Player((int)personStart.getX(), (int)personStart.getY(), personTypes.get(0));

@@ -19,6 +19,11 @@ import javax.swing.border.TitledBorder;
 @SuppressWarnings("serial")
 public class ControlPanel extends JPanel{
 	private double angle;
+	private double velocity;
+	private final double maxAngle = 360;
+	private final double minAngle = 0;
+	private final double maxVelocity = 250;
+	private final double minVelocity = 0;
 	private JTextField angleInput;
 	private JComboBox<String> possibleTargets;
 	private JComboBox<String> possibleMissiles;
@@ -29,6 +34,7 @@ public class ControlPanel extends JPanel{
 	private ArrayList<Target> targetChoices;
 	private ArrayList<Player> playerChoices;
 	private DisplayPanel display;
+	private JTextField velocityInput;
 	public Question askQuestion(){
 		int index = (int) (Math.random()*possibleQuestions.size());
 		return possibleQuestions.get(index);
@@ -103,6 +109,27 @@ public class ControlPanel extends JPanel{
 		}
 		JMenu fileMenu = new JMenu("File");
 		//JLabel angleLabel = new JLabel("Input Angle:");
+		velocityInput = new JTextField(5);
+		JButton velocityInputButton = new JButton("Enter");
+		class VelocityListener implements ActionListener{
+			public void actionPerformed(ActionEvent e)
+			{
+				try{
+					String input = velocityInput.getText();
+					velocity = Double.parseDouble(input);
+					if( !(velocity > minVelocity) || !(velocity <= maxVelocity)){
+						JOptionPane.showMessageDialog(null, "Please enter a number between " + minVelocity + " and " + maxVelocity, "Invalid input", JOptionPane.INFORMATION_MESSAGE);
+						return;
+					}
+				}
+				catch( NumberFormatException exc){
+					JOptionPane.showMessageDialog(null, "Please enter a number between " + minVelocity + " and " + maxVelocity, "Invalid input", JOptionPane.INFORMATION_MESSAGE);
+					return;
+				}
+			}
+		}
+		velocityInputButton.addActionListener( new VelocityListener());
+		
 		angleInput = new JTextField(5);
 		JButton angleInputButton = new JButton("Enter");
 		class EnterListener implements ActionListener {
@@ -111,13 +138,13 @@ public class ControlPanel extends JPanel{
 				try{
 					String input = angleInput.getText();
 					angle = Double.parseDouble(input);
-					if( !(angle >= 0) || !(angle <= 360)){
-						JOptionPane.showMessageDialog(null, "Please enter a number between 0 and 360", "Invalid input", JOptionPane.INFORMATION_MESSAGE);
+					if( !(angle >= 0) || !(angle <= maxAngle)){
+						JOptionPane.showMessageDialog(null, "Please enter a number between " + minAngle + " and " + maxAngle, "Invalid input", JOptionPane.INFORMATION_MESSAGE);
 						return;
 					}
 				}
 				catch( NumberFormatException exc){
-					JOptionPane.showMessageDialog(null, "Please enter a number between 0 and 360", "Invalid input", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Please enter a number between " + minAngle + " and " + maxAngle, "Invalid input", JOptionPane.INFORMATION_MESSAGE);
 					return;
 				}
 			}
@@ -134,7 +161,7 @@ public class ControlPanel extends JPanel{
 		exit.addActionListener(new ExitListener());
 		fileMenu.add(exit);
 		fileMenuBar.add(fileMenu);
-		this.setLayout(new GridLayout(1,4));
+		this.setLayout(new GridLayout(1,5));
 		//this.add(fileMenuBar);
 		
 		JPanel playerPanel = new JPanel();
@@ -155,10 +182,17 @@ public class ControlPanel extends JPanel{
 		targetPanel.setBorder(new TitledBorder(new EtchedBorder(), "Targets"));
 		this.add(targetPanel);
 		
+		
 		JPanel anglePanel = new JPanel();
 		anglePanel.setBorder(new TitledBorder(new EtchedBorder(), "Input Angle"));
 		anglePanel.add(angleInput);
 		anglePanel.add(angleInputButton);
 		this.add(anglePanel);
+		
+		JPanel velocityPanel = new JPanel();
+		velocityPanel.setBorder(new TitledBorder( new EtchedBorder(), "Input Velocity"));
+		velocityPanel.add(velocityInput);
+		velocityPanel.add(velocityInputButton);
+		this.add(velocityPanel);
 	}
 }
