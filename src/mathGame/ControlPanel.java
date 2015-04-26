@@ -2,6 +2,8 @@ package mathGame;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -201,6 +203,27 @@ public class ControlPanel extends JPanel{
 		velocityPanel.add(velocityInput);
 		velocityPanel.add(velocityInputButton);
 		this.add(velocityPanel);
+	}
+	
+	class AngleFeildListener implements FocusListener{
+
+
+		
+		public void focusLost(FocusEvent e) {
+			Missile m1 = new Missile();
+			
+			if( (angle >= 0) || (angle <= 360)){
+				m1.drawPath(getGraphics());
+			}
+			
+		}
+
+		@Override
+		public void focusGained(FocusEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
 	}
 	class ComboListener implements ActionListener {
 		public void actionPerformed(ActionEvent e)
