@@ -1,4 +1,5 @@
 package mathGame;
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,6 +23,7 @@ import javax.swing.border.TitledBorder;
 public class ControlPanel extends JPanel{
 	private double angle;
 	private double velocity;
+	private JTextField scoreField;
 	private final double maxAngle = 360;
 	private final double minAngle = 0;
 	private final double maxVelocity = 250;
@@ -117,24 +119,7 @@ public class ControlPanel extends JPanel{
 		velocityInput = new JTextField(5);
 		velocityInput.setText("0");
 		JButton velocityInputButton = new JButton("Enter");
-		class VelocityListener implements ActionListener{
-			public void actionPerformed(ActionEvent e)
-			{
-				try{
-					String input = velocityInput.getText();
-					velocity = Double.parseDouble(input);
-					if( !(velocity >= minVelocity) || !(velocity <= maxVelocity)){
-						JOptionPane.showMessageDialog(null, "Please enter a number between " + minVelocity + " and " + maxVelocity, "Invalid input", JOptionPane.INFORMATION_MESSAGE);
-						return;
-					}
-				}
-				catch( NumberFormatException exc){
-					JOptionPane.showMessageDialog(null, "Please enter a number between " + minVelocity + " and " + maxVelocity, "Invalid input", JOptionPane.INFORMATION_MESSAGE);
-					return;
-				}
-				display.setVelocity(velocity);
-			}
-		}
+		
 		velocityInputButton.addActionListener( new VelocityListener());
 		
 		angleInput = new JTextField(5);
@@ -143,10 +128,10 @@ public class ControlPanel extends JPanel{
 			public void actionPerformed(ActionEvent e)
 			{
 				display.launchMissile();
+				//scoreField.setText(new Integer(display.getScore()).toString());
 			}
 		}
 		
-		angleInputButton.addActionListener(new LaunchListener());
 		fileMenuBar = new JMenuBar();
 		class ExitListener implements ActionListener {
 			public void actionPerformed(ActionEvent e)
@@ -158,42 +143,74 @@ public class ControlPanel extends JPanel{
 		exit.addActionListener(new ExitListener());
 		fileMenu.add(exit);
 		fileMenuBar.add(fileMenu);
-		this.setLayout(new GridLayout(1,5));
+		this.setLayout(new GridLayout(1,2));
 		
 		JPanel playerPanel = new JPanel();
 		playerPanel.setBorder(new TitledBorder(new EtchedBorder(), "Players"));
 		possiblePlayers = createPlayersCombo();
 		playerPanel.add(possiblePlayers);
-		this.add(playerPanel);
 		
 		JPanel missilePanel = new JPanel();
 		missilePanel.setBorder(new TitledBorder(new EtchedBorder(), "Missiles"));
 		possibleMissiles = createMissileCombo();
 		missilePanel.add(possibleMissiles);
-		this.add(missilePanel);
 		
 		JPanel targetPanel = new JPanel();
 		possibleTargets = createTargetCombo();
 		targetPanel.add(possibleTargets);
 		targetPanel.setBorder(new TitledBorder(new EtchedBorder(), "Targets"));
-		this.add(targetPanel);
 		
-		angleInput.addFocusListener(new AngleFieldListener());
+		JPanel ComboBoxPanel = new JPanel();
+		ComboBoxPanel.setLayout(new GridLayout(1, 3));
+		ComboBoxPanel.add(targetPanel);
+		ComboBoxPanel.add(missilePanel);
+		ComboBoxPanel.add(playerPanel);
+		this.add(ComboBoxPanel);
+		
+		angleInputButton.addActionListener(new AngleButtonListener());
 		JPanel anglePanel = new JPanel();
 		anglePanel.setBorder(new TitledBorder(new EtchedBorder(), "Input Angle"));
 		anglePanel.add(angleInput);
 		anglePanel.add(angleInputButton);
-		this.add(anglePanel);
 		
 		JPanel velocityPanel = new JPanel();
 		velocityPanel.setBorder(new TitledBorder( new EtchedBorder(), "Input Velocity"));
 		velocityPanel.add(velocityInput);
 		velocityPanel.add(velocityInputButton);
-		this.add(velocityPanel);
+		
+		JPanel inputPanel = new JPanel();
+		inputPanel.setLayout(new GridLayout(1, 2));
+		inputPanel.add(anglePanel);
+		inputPanel.add(velocityPanel);
+		this.add(inputPanel);
+		
+		JButton launchButton = new JButton("Launch");
+		launchButton.addActionListener(new LaunchListener());
+		
+		scoreField = new JTextField(5);
+		display.setScoreField(scoreField);
+		scoreField.setEditable(false);
+		scoreField.setText(new Integer(display.getScore()).toString());
+		JPanel scorePanel = new JPanel();
+		scorePanel.add(scoreField);
+		scorePanel.setBorder(new TitledBorder( new EtchedBorder(), "Score"));
+		
+		JPanel otherPanel = new JPanel();
+		otherPanel.setLayout(new GridLayout(1, 2));
+		otherPanel.add(scorePanel);
+		otherPanel.add(launchButton);
+		this.add(otherPanel);
+		
+		JPanel looksPanel = new JPanel();
+		looksPanel.setLayout(new BorderLayout());
+		looksPanel.add(otherPanel, BorderLayout.SOUTH);
+		looksPanel.add(inputPanel, BorderLayout.CENTER);
+		this.add(looksPanel);
 	}
 	
-	class AngleFieldListener implements FocusListener{
-		public void focusLost(FocusEvent e) {
+	class AngleButtonListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
 			try{
 				String input = angleInput.getText();
 				angle = Double.parseDouble(input);
@@ -208,12 +225,27 @@ public class ControlPanel extends JPanel{
 			}
 			display.setAngle(angle);
 			display.setLaunchPoints(display.getCurrentMissile().calcPath(display.getAngle(), display.getVelocity() ));
-			//display.printValues();
-			display.getCurrentMissile().drawPath(getGraphics());;
+			display.getCurrentMissile().drawPath(getGraphics());
 		}
-
-		@Override
-		public void focusGained(FocusEvent e) {
+	}
+	class VelocityListener implements ActionListener{
+		public void actionPerformed(ActionEvent e)
+		{
+			try{
+				String input = velocityInput.getText();
+				velocity = Double.parseDouble(input);
+				if( !(velocity >= minVelocity) || !(velocity <= maxVelocity)){
+					JOptionPane.showMessageDialog(null, "Please enter a number between " + minVelocity + " and " + maxVelocity, "Invalid input", JOptionPane.INFORMATION_MESSAGE);
+					return;
+				}
+			}
+			catch( NumberFormatException exc){
+				JOptionPane.showMessageDialog(null, "Please enter a number between " + minVelocity + " and " + maxVelocity, "Invalid input", JOptionPane.INFORMATION_MESSAGE);
+				return;
+			}
+			display.setVelocity(velocity);
+			display.setLaunchPoints(display.getCurrentMissile().calcPath(display.getAngle(), display.getVelocity() ));
+			display.getCurrentMissile().drawPath(getGraphics());
 		}
 	}
 	class ComboListener implements ActionListener {

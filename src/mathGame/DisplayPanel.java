@@ -7,11 +7,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JTextField;
 import javax.swing.Timer;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class DisplayPanel extends JPanel{
+	private JTextField scoreField;
+	private int score = 0;
 	private Target currentTarget;
 	private Missile currentMissile;
 	private Player currentPlayer;
@@ -112,6 +115,8 @@ public class DisplayPanel extends JPanel{
 				currentTarget.setX((int) (Math.random()*this.getSize().getWidth()));
 				currentTarget.setY((int) (Math.random()*this.getSize().getHeight()));
 			}
+			score++;
+			scoreField.setText(new Integer(score).toString());
 		}
 		else if(currentIndex >= launchPoints.size()){
 			currentIndex = 0;
@@ -127,4 +132,11 @@ public class DisplayPanel extends JPanel{
 			
 		}
 	}
+	public int getScore() {
+		return score;
+	}
+	public void setScoreField(JTextField scoreField) {
+		this.scoreField = scoreField;
+	}
+	
 }
