@@ -69,7 +69,7 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 		targetTypes = new ArrayList<String>();
 		controlGUI = new ControlPanel();
 		loadConfigFiles();
-		controlGUI.setDisplay(displayPanel);
+		/*controlGUI.setDisplay(displayPanel);
 		controlGUI.setupGUI(missileTypes, personTypes, targetTypes);
 		setSize(screenX, screenY);
 		setTitle("Math and Angles Fun Times!");// Note: title is a work in progress
@@ -77,15 +77,13 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 		add(controlGUI, BorderLayout.NORTH);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setJMenuBar(controlGUI.getFileMenuBar());
-		setVisible(true);
+		setVisible(true);*/
 	}
 	
 	public void loadConfigFiles() throws BadConfigFormatException{
 		try{
 			//FileReader configReader = new FileReader(filename);
 			InputStream configReader = getClass().getResourceAsStream(filename);
-			//InputStream configReader = new FileInputStream(filename);
-			System.out.println(configReader);
 			Scanner inf = new Scanner(configReader);
 			String currentLine = inf.nextLine();
 			String[] lineParse = currentLine.split(" ");

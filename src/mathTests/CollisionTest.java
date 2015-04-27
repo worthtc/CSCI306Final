@@ -16,7 +16,7 @@ public class CollisionTest {
 		targ = new Target();
 	}
 	@Test
-	public void CollsionTestTrue() {
+	public void CollisionTestTrue() {
 		int x = 85;
 		int y = 90;
 		A3.setX(x);
