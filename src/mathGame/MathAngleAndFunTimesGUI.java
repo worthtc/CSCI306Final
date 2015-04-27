@@ -2,8 +2,7 @@ package mathGame;
 
 import java.awt.BorderLayout;
 import java.awt.Point;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -29,10 +28,10 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 	
 	public MathAngleAndFunTimesGUI(){
 		//basic constructor for testing
-	}
-	
+		
+	}	
 	public MathAngleAndFunTimesGUI(String filename){
-		this.setResizable(false);
+		this.setResizable(false); //Since our locations are all set pixel values we want to make sure that the screen is not resized
 		this.filename = filename;
 		missileTypes = new ArrayList<String>();
 		personTypes = new ArrayList<String>();
@@ -42,11 +41,13 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 			loadConfigFiles();
 		}catch(BadConfigFormatException e){
 			System.out.println(e);
-			//System.exit(1); //We should exit the program if the Config file is not correct, otherwise a lot of things will be null
 		}
 		Missile startMissile = new Missile((int)missileStart.getX(), (int)missileStart.getY(), missileTypes.get(0));
 		Player startPlayer = new Player((int)personStart.getX(), (int)personStart.getY(), personTypes.get(0));
 		Target startTarget = new Target((int)targetStart.getX(), (int)targetStart.getY(), targetWidth, targetHeight, targetTypes.get(0));
+		startMissile.setScreenX(screenX);
+		startMissile.setScreenY(screenY);
+		startMissile.setGravity(gravity);
 		displayPanel = new DisplayPanel(startMissile, startPlayer, startTarget );
 		controlGUI.setDisplay(displayPanel);
 		controlGUI.setupGUI(missileTypes, personTypes, targetTypes);
@@ -54,6 +55,7 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 		setTitle("Math and Angles Fun Times!");// Note: title is a work in progress
 		setLayout(new BorderLayout());
 		add(controlGUI, BorderLayout.NORTH);
+		add(displayPanel, BorderLayout.CENTER);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setJMenuBar(controlGUI.getFileMenuBar());
 		setVisible(true);
@@ -67,7 +69,7 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 		targetTypes = new ArrayList<String>();
 		controlGUI = new ControlPanel();
 		loadConfigFiles();
-		controlGUI.setDisplay(displayPanel);
+		/*controlGUI.setDisplay(displayPanel);
 		controlGUI.setupGUI(missileTypes, personTypes, targetTypes);
 		setSize(screenX, screenY);
 		setTitle("Math and Angles Fun Times!");// Note: title is a work in progress
@@ -75,12 +77,13 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 		add(controlGUI, BorderLayout.NORTH);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setJMenuBar(controlGUI.getFileMenuBar());
-		setVisible(true);
+		setVisible(true);*/
 	}
 	
 	public void loadConfigFiles() throws BadConfigFormatException{
 		try{
-			FileReader configReader = new FileReader(filename);
+			//FileReader configReader = new FileReader(filename);
+			InputStream configReader = getClass().getResourceAsStream(filename);
 			Scanner inf = new Scanner(configReader);
 			String currentLine = inf.nextLine();
 			String[] lineParse = currentLine.split(" ");
@@ -181,7 +184,7 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 				}
 			}
 			inf.close();
-		}catch(FileNotFoundException e){
+		}catch(Exception e){
 			System.out.println(e);
 		}
 	}
@@ -208,6 +211,6 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 	
 	@SuppressWarnings("unused")
 	public static void main(String[] args){
-		MathAngleAndFunTimesGUI game = new MathAngleAndFunTimesGUI("launchConfig.txt");
+		MathAngleAndFunTimesGUI game = new MathAngleAndFunTimesGUI("/data/launchConfig.txt");
 	}
 }

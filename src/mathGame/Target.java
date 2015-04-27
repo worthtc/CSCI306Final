@@ -1,4 +1,5 @@
 package mathGame;
+import java.awt.Color;
 import java.awt.Graphics;
 
 
@@ -8,7 +9,10 @@ public class Target {
 	private int width;
 	private int height;
 	private String name;
-	public void draw( Graphics g ){}
+	public void draw( Graphics g ){
+		g.setColor(Color.MAGENTA);
+		g.fillOval(x, y, width, height);
+	}
 	
 	public int getX(){
 		return x;

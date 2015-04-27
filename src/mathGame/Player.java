@@ -1,4 +1,5 @@
 package mathGame;
+import java.awt.Color;
 import java.awt.Graphics;
 
 
@@ -13,7 +14,10 @@ public class Player {
 		this.y = y;
 		this.name = name;
 	}
-	public void draw( Graphics g ){}
+	public void draw( Graphics g ){
+		g.setColor(Color.BLACK);
+		g.fillRect(x, y, 5, 5);
+	}
 	public int getX() {
 		return x;
 	}
