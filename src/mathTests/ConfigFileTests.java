@@ -18,14 +18,14 @@ public class ConfigFileTests {
 	
 	@BeforeClass
 	public static void init(){
-		game = new MathAngleAndFunTimesGUI("launchConfig.txt");
+		game = new MathAngleAndFunTimesGUI("data/launchConfig.txt");
 	}
 	
 	@Test (expected = BadConfigFormatException.class)
 	public void testConfigFormatException() throws BadConfigFormatException{
 		//Assure that bad configuration errors are thrown when appropriate
 		MathAngleAndFunTimesGUI game2 = new MathAngleAndFunTimesGUI();
-		game2.MAAFTGUITestConstructor("badConfig.txt");
+		game2.MAAFTGUITestConstructor("data/badConfig.txt");
 	}
 	
 	@Test

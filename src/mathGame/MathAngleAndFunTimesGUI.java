@@ -2,8 +2,7 @@ package mathGame;
 
 import java.awt.BorderLayout;
 import java.awt.Point;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -83,7 +82,10 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 	
 	public void loadConfigFiles() throws BadConfigFormatException{
 		try{
-			FileReader configReader = new FileReader(filename);
+			//FileReader configReader = new FileReader(filename);
+			InputStream configReader = getClass().getResourceAsStream(filename);
+			//InputStream configReader = new FileInputStream(filename);
+			System.out.println(configReader);
 			Scanner inf = new Scanner(configReader);
 			String currentLine = inf.nextLine();
 			String[] lineParse = currentLine.split(" ");
@@ -184,7 +186,7 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 				}
 			}
 			inf.close();
-		}catch(FileNotFoundException e){
+		}catch(Exception e){
 			System.out.println(e);
 		}
 	}
@@ -211,6 +213,6 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 	
 	@SuppressWarnings("unused")
 	public static void main(String[] args){
-		MathAngleAndFunTimesGUI game = new MathAngleAndFunTimesGUI("launchConfig.txt");
+		MathAngleAndFunTimesGUI game = new MathAngleAndFunTimesGUI("/data/launchConfig.txt");
 	}
 }

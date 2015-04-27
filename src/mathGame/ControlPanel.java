@@ -3,8 +3,6 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -26,7 +24,7 @@ public class ControlPanel extends JPanel{
 	private JTextField scoreField;
 	private final double maxAngle = 360;
 	private final double minAngle = 0;
-	private final double maxVelocity = 250;
+	private final double maxVelocity = 120;
 	private final double minVelocity = 0;
 	private JTextField angleInput;
 	private JComboBox<String> possibleTargets;

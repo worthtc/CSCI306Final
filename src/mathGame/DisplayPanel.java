@@ -12,6 +12,7 @@ import javax.swing.Timer;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class DisplayPanel extends JPanel{
 	private JTextField scoreField;
 	private int score = 0;
