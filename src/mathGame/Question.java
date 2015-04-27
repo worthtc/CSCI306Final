@@ -29,7 +29,7 @@ public class Question extends JFrame {
 		super();
 		this.answer = answer;
 		this.questionText = questionText;
-		question = new Question("", "");
+		
 		panel = new ControlPanel();
 	}
 	
