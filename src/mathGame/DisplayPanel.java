@@ -26,6 +26,7 @@ public class DisplayPanel extends JPanel{
 	private ArrayList<Point> launchPoints;
 	private Timer timer;
 	private int currentIndex;
+	private boolean drawPath;
 	public DisplayPanel(Missile currentMissile, Player currentPlayer, Target currentTarget) {
 		this.currentTarget = currentTarget;
 		this.currentMissile = currentMissile;
@@ -94,6 +95,9 @@ public class DisplayPanel extends JPanel{
 		currentTarget.draw(g);
 		currentMissile.draw(g);
 		currentPlayer.draw(g);
+		if( drawPath ){
+			currentMissile.drawPath(g);
+		}
 	}
 	
 	private class TimerListener implements ActionListener {
@@ -138,6 +142,10 @@ public class DisplayPanel extends JPanel{
 	}
 	public void setScoreField(JTextField scoreField) {
 		this.scoreField = scoreField;
+	}
+	public void setDrawPath(boolean drawPath) {
+		this.drawPath = drawPath;
+		this.repaint();
 	}
 	
 }

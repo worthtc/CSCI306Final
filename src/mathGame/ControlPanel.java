@@ -125,6 +125,7 @@ public class ControlPanel extends JPanel{
 		class LaunchListener implements ActionListener {
 			public void actionPerformed(ActionEvent e)
 			{
+				display.setDrawPath(false);
 				display.launchMissile();
 				
 				//scoreField.setText(new Integer(display.getScore()).toString());
@@ -231,7 +232,8 @@ public class ControlPanel extends JPanel{
 			}
 			display.setAngle(angle);
 			display.setLaunchPoints(display.getCurrentMissile().calcPath(display.getAngle(), display.getVelocity() ));
-			display.getCurrentMissile().drawPath(getGraphics());
+			//display.getCurrentMissile().drawPath(getGraphics());
+			display.setDrawPath(true);
 		}
 	}
 	class VelocityListener implements ActionListener{
@@ -251,7 +253,8 @@ public class ControlPanel extends JPanel{
 			}
 			display.setVelocity(velocity);
 			display.setLaunchPoints(display.getCurrentMissile().calcPath(display.getAngle(), display.getVelocity() ));
-			display.getCurrentMissile().drawPath(getGraphics());
+			//display.getCurrentMissile().drawPath(getGraphics());
+			display.setDrawPath(true);
 		}
 	}
 	class ComboListener implements ActionListener {

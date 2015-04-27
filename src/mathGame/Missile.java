@@ -39,8 +39,10 @@ public class Missile {
 	}
 	public void drawPath( Graphics g ){
 		g.setColor(Color.RED);
+		
 		for (int i = 0; i < launchPoints.size(); i++){
-			g.fillOval((int)(launchPoints.get(i).getX()),(int)(launchPoints.get(i).getY()),6,6);
+			if(i%5 == 0) //Don't draw all the points so we get a better dotted line
+				g.fillOval((int)(launchPoints.get(i).getX()),(int)(launchPoints.get(i).getY()),6,6);
 		}
 	}
 	public ArrayList<Point> calcPath(double inputAngle, double intialVelocity ){
