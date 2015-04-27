@@ -126,7 +126,9 @@ public class ControlPanel extends JPanel{
 			public void actionPerformed(ActionEvent e)
 			{
 				display.launchMissile();
+				
 				//scoreField.setText(new Integer(display.getScore()).toString());
+				
 			}
 		}
 		
@@ -215,6 +217,12 @@ public class ControlPanel extends JPanel{
 				if( !(angle >= 0) || !(angle <= maxAngle)){
 					JOptionPane.showMessageDialog(null, "Please enter a number between " + minAngle + " and " + maxAngle, "Invalid input", JOptionPane.INFORMATION_MESSAGE);
 					return;
+				}
+				int score = Integer.parseInt(scoreField.getText());
+				if(score> 0 && (score%10) == 0){
+					Question gui = new Question(display.getName(),possibleQuestions.get(0).getQuestionText());
+		    		
+		    		gui.setVisible(true);
 				}
 			}
 			catch( NumberFormatException exc){
