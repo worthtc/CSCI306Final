@@ -218,9 +218,9 @@ public class ControlPanel extends JPanel{
 					JOptionPane.showMessageDialog(null, "Please enter a number between " + minAngle + " and " + maxAngle, "Invalid input", JOptionPane.INFORMATION_MESSAGE);
 					return;
 				}
-				int score = Integer.parseInt(scoreField.getText());
-				if(score> 0 && (score%10) == 0){
-					Question gui = new Question(display.getName(),possibleQuestions.get(0).getQuestionText());
+				
+				if(display.getScore()> 0 && (display.getScore()%10) == 0){
+					Question gui = new Question(askQuestion().getQuestionText(),askQuestion().getAnswerText());
 		    		
 		    		gui.setVisible(true);
 				}

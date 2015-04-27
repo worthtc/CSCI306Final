@@ -1,5 +1,7 @@
 package mathGame;
 
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,8 +12,9 @@ public class Question extends JFrame {
 	private String questionText;
 	private JButton yes;
 	private JButton no;
-	private Question question;
 	private ControlPanel panel;
+	private JTextField question;
+	private JTextField answerField;
 	
 	public boolean checkAnswer( String answer){
 		if(answer.equals(this.answer)){
@@ -29,8 +32,18 @@ public class Question extends JFrame {
 		super();
 		this.answer = answer;
 		this.questionText = questionText;
-		
+		setLayout(new GridLayout(4,4));
+		setTitle("Want to answer a Question?");
+		setSize(350,350);
 		panel = new ControlPanel();
+		yes = submitSetup();
+		no = noSetup();
+		add(yes);
+		add(no);
+	    question = new JTextField("Question: ");
+	    answerField=new JTextField("");
+		add(question, BorderLayout.NORTH);
+		add(answerField,BorderLayout.NORTH);
 	}
 	
 	public String getQuestionText(){
@@ -51,13 +64,17 @@ public class Question extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			panel.askQuestion();
-			answer = panel.askQuestion().toString();
-			if(checkAnswer(answer)){
-				System.out.println("you got it right!");
-			} else {
-				System.out.println("sorry you got it wrong");
-			}
+			//System.out.println(panel.askQuestion().toString());
+			questionText = getQuestionText();
+			System.out.println(questionText);
+			question.setText(questionText);
+			String playerAnswer = answerField.getText();
+			System.out.println(answer);
+			//answer = panel.askQuestion().toString();
+		
+			if(checkAnswer(playerAnswer)){
+				JOptionPane.showMessageDialog(null,"you got it right!");
+			} 
 		 	
 		  }
 	    }
