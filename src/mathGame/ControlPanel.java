@@ -115,6 +115,7 @@ public class ControlPanel extends JPanel{
 		JMenu fileMenu = new JMenu("File");
 		//JLabel angleLabel = new JLabel("Input Angle:");
 		velocityInput = new JTextField(5);
+		velocityInput.setText("0");
 		JButton velocityInputButton = new JButton("Enter");
 		class VelocityListener implements ActionListener{
 			public void actionPerformed(ActionEvent e)
@@ -122,7 +123,7 @@ public class ControlPanel extends JPanel{
 				try{
 					String input = velocityInput.getText();
 					velocity = Double.parseDouble(input);
-					if( !(velocity > minVelocity) || !(velocity <= maxVelocity)){
+					if( !(velocity >= minVelocity) || !(velocity <= maxVelocity)){
 						JOptionPane.showMessageDialog(null, "Please enter a number between " + minVelocity + " and " + maxVelocity, "Invalid input", JOptionPane.INFORMATION_MESSAGE);
 						return;
 					}
@@ -138,27 +139,14 @@ public class ControlPanel extends JPanel{
 		
 		angleInput = new JTextField(5);
 		JButton angleInputButton = new JButton("Enter");
-		class EnterListener implements ActionListener {
+		class LaunchListener implements ActionListener {
 			public void actionPerformed(ActionEvent e)
 			{
-				try{
-					String input = angleInput.getText();
-					angle = Double.parseDouble(input);
-					if( !(angle >= 0) || !(angle <= maxAngle)){
-						JOptionPane.showMessageDialog(null, "Please enter a number between " + minAngle + " and " + maxAngle, "Invalid input", JOptionPane.INFORMATION_MESSAGE);
-						return;
-					}
-				}
-				catch( NumberFormatException exc){
-					JOptionPane.showMessageDialog(null, "Please enter a number between " + minAngle + " and " + maxAngle, "Invalid input", JOptionPane.INFORMATION_MESSAGE);
-					return;
-				}
-				display.setAngle(angle);
-				//display.printValues();
+				display.launchMissile();
 			}
 		}
 		
-		angleInputButton.addActionListener(new EnterListener());
+		angleInputButton.addActionListener(new LaunchListener());
 		fileMenuBar = new JMenuBar();
 		class ExitListener implements ActionListener {
 			public void actionPerformed(ActionEvent e)
@@ -171,7 +159,6 @@ public class ControlPanel extends JPanel{
 		fileMenu.add(exit);
 		fileMenuBar.add(fileMenu);
 		this.setLayout(new GridLayout(1,5));
-		//this.add(fileMenuBar);
 		
 		JPanel playerPanel = new JPanel();
 		playerPanel.setBorder(new TitledBorder(new EtchedBorder(), "Players"));
@@ -191,7 +178,7 @@ public class ControlPanel extends JPanel{
 		targetPanel.setBorder(new TitledBorder(new EtchedBorder(), "Targets"));
 		this.add(targetPanel);
 		
-		
+		angleInput.addFocusListener(new AngleFieldListener());
 		JPanel anglePanel = new JPanel();
 		anglePanel.setBorder(new TitledBorder(new EtchedBorder(), "Input Angle"));
 		anglePanel.add(angleInput);
@@ -205,31 +192,29 @@ public class ControlPanel extends JPanel{
 		this.add(velocityPanel);
 	}
 	
-	class AngleFeildListener implements FocusListener{
-
-
-		
+	class AngleFieldListener implements FocusListener{
 		public void focusLost(FocusEvent e) {
-		
+			try{
 				String input = angleInput.getText();
 				angle = Double.parseDouble(input);
 				if( !(angle >= 0) || !(angle <= maxAngle)){
 					JOptionPane.showMessageDialog(null, "Please enter a number between " + minAngle + " and " + maxAngle, "Invalid input", JOptionPane.INFORMATION_MESSAGE);
 					return;
 				}
-			
-			
-				
-			
+			}
+			catch( NumberFormatException exc){
+				JOptionPane.showMessageDialog(null, "Please enter a number between " + minAngle + " and " + maxAngle, "Invalid input", JOptionPane.INFORMATION_MESSAGE);
+				return;
+			}
+			display.setAngle(angle);
+			display.setLaunchPoints(display.getCurrentMissile().calcPath(display.getAngle(), display.getVelocity() ));
+			//display.printValues();
 			display.getCurrentMissile().drawPath(getGraphics());;
 		}
 
 		@Override
 		public void focusGained(FocusEvent e) {
-			// TODO Auto-generated method stub
-			
 		}
-		
 	}
 	class ComboListener implements ActionListener {
 		public void actionPerformed(ActionEvent e)
@@ -243,7 +228,6 @@ public class ControlPanel extends JPanel{
 			else if( e.getSource() == possibleTargets){
 				display.getCurrentTarget().setName(possibleTargets.getSelectedItem().toString());
 			}
-			//display.printValues();
 		}
 	}
 }

@@ -25,19 +25,6 @@ public class Missile {
 	public void setY(int y) {
 		this.y = y;
 	}
-	public void launchMissile(){
-		if( launchPoints == null){
-			JOptionPane.showMessageDialog(null, "You must enter an angle and velocity before launching the missile!", "Invalid input", JOptionPane.INFORMATION_MESSAGE);
-			return;
-		}
-		for( Point pathPoint: launchPoints ){
-			this.setX(pathPoint.x);
-			this.setY(pathPoint.y);
-			if( this.isColliding(boardTarget) ){
-				return;
-			}
-		}
-	}
 	public void draw( Graphics g ){}
 	public boolean isColliding( Target boardTarget){
 		if (x >= boardTarget.getX() && x <= boardTarget.getX() + boardTarget.getWidth()){
@@ -47,7 +34,7 @@ public class Missile {
 		}
 		return false;
 	}
-	public void drawPath( Graphics g){}
+	public void drawPath( Graphics g ){}
 	public ArrayList<Point> calcPath(double inputAngle, double intialVelocity ){
 		int nextX = this.x;
 		int nextY = this.y;
@@ -94,6 +81,12 @@ public class Missile {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public int getScreenX() {
+		return screenX;
+	}
+	public int getScreenY() {
+		return screenY;
 	}
 	
 	

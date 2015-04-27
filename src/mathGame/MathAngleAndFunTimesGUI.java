@@ -46,6 +46,8 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 		Missile startMissile = new Missile((int)missileStart.getX(), (int)missileStart.getY(), missileTypes.get(0));
 		Player startPlayer = new Player((int)personStart.getX(), (int)personStart.getY(), personTypes.get(0));
 		Target startTarget = new Target((int)targetStart.getX(), (int)targetStart.getY(), targetWidth, targetHeight, targetTypes.get(0));
+		startMissile.setScreenX(screenX);
+		startMissile.setScreenY(screenY);
 		displayPanel = new DisplayPanel(startMissile, startPlayer, startTarget );
 		controlGUI.setDisplay(displayPanel);
 		controlGUI.setupGUI(missileTypes, personTypes, targetTypes);
@@ -53,6 +55,7 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 		setTitle("Math and Angles Fun Times!");// Note: title is a work in progress
 		setLayout(new BorderLayout());
 		add(controlGUI, BorderLayout.NORTH);
+		add(displayPanel, BorderLayout.CENTER);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setJMenuBar(controlGUI.getFileMenuBar());
 		setVisible(true);
