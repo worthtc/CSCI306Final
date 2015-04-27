@@ -208,12 +208,18 @@ public class ControlPanel extends JPanel{
 
 		
 		public void focusLost(FocusEvent e) {
-			Missile m1 = new Missile();
+		
+				String input = angleInput.getText();
+				angle = Double.parseDouble(input);
+				if( !(angle >= 0) || !(angle <= maxAngle)){
+					JOptionPane.showMessageDialog(null, "Please enter a number between " + minAngle + " and " + maxAngle, "Invalid input", JOptionPane.INFORMATION_MESSAGE);
+					return;
+				}
 			
-			if( (angle >= 0) || (angle <= 360)){
-				m1.drawPath(getGraphics());
-			}
 			
+				
+			
+			display.getCurrentMissile().drawPath(getGraphics());;
 		}
 
 		@Override
