@@ -126,7 +126,13 @@ public class ControlPanel extends JPanel{
 			public void actionPerformed(ActionEvent e)
 			{
 				display.launchMissile();
+				int score = Integer.parseInt(scoreField.getText());
 				//scoreField.setText(new Integer(display.getScore()).toString());
+				if((score%10) == 0){
+					Question gui = new Question(display.getName(),possibleQuestions.get(0).getQuestionText());
+		    		
+		    		gui.setVisible(true);
+				}
 			}
 		}
 		
