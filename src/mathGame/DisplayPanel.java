@@ -6,8 +6,8 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import javax.swing.Timer;
 
+import javax.swing.Timer;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -106,6 +106,12 @@ public class DisplayPanel extends JPanel{
 			timer.stop();
 			currentMissile.setX(missileStartX);
 			currentMissile.setY(missileStartY);
+			currentTarget.setX((int) (Math.random()*this.getSize().getWidth()));
+			currentTarget.setY((int) (Math.random()*this.getSize().getHeight()));
+			while( currentMissile.isColliding(currentTarget) ){
+				currentTarget.setX((int) (Math.random()*this.getSize().getWidth()));
+				currentTarget.setY((int) (Math.random()*this.getSize().getHeight()));
+			}
 		}
 		else if(currentIndex >= launchPoints.size()){
 			currentIndex = 0;
