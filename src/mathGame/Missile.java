@@ -1,4 +1,5 @@
 package mathGame;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
@@ -25,7 +26,10 @@ public class Missile {
 	public void setY(int y) {
 		this.y = y;
 	}
-	public void draw( Graphics g ){}
+	public void draw( Graphics g ){
+		g.setColor(Color.RED);
+		g.fillRect(x, y, 5, 5);
+	}
 	public boolean isColliding( Target boardTarget){
 		if (x >= boardTarget.getX() && x <= boardTarget.getX() + boardTarget.getWidth()){
 			if (y >= boardTarget.getY() && y <= boardTarget.getY() + boardTarget.getHeight()){
@@ -45,11 +49,13 @@ public class Missile {
 		double time = 0.0;
 		Point nextPoint = new Point(nextX, nextY);
 		pathList.add(nextPoint);
+		
 		//We continue to add points to the list until our missile goes off of the screen 
 		//We can just test for the screenX and Y if we want the missile to be able to go above y=0
 		while( nextPoint.x >= 0 && nextPoint.x <= screenX && nextPoint.y >= 0 && nextPoint.y <= screenY){
 			time += 0.1; //Increment our timesteps by 0.1 seconds. This value can be changed if needed
 			//Calculate X and Y for the next point according to the equation X = X_0 + v_0*t + (1/2)*a*t^2
+			System.out.println(nextY);
 			nextX =(int) (this.x + velocityX*time); 
 			nextY = (int) (this.y - velocityY*time + (0.5)*gravity*time*time); //Here we subtract velocityY*time as velocityY is upwards which is negative
 			nextPoint = new Point(nextX, nextY);

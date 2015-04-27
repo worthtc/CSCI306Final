@@ -48,6 +48,7 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 		Target startTarget = new Target((int)targetStart.getX(), (int)targetStart.getY(), targetWidth, targetHeight, targetTypes.get(0));
 		startMissile.setScreenX(screenX);
 		startMissile.setScreenY(screenY);
+		startMissile.setGravity(gravity);
 		displayPanel = new DisplayPanel(startMissile, startPlayer, startTarget );
 		controlGUI.setDisplay(displayPanel);
 		controlGUI.setupGUI(missileTypes, personTypes, targetTypes);

@@ -3,7 +3,10 @@ package mathGame;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.Timer;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -12,14 +15,20 @@ public class DisplayPanel extends JPanel{
 	private Target currentTarget;
 	private Missile currentMissile;
 	private Player currentPlayer;
+	private int missileStartX;
+	private int missileStartY;
 	private double angle;
 	private double velocity;
 	private ArrayList<Point> launchPoints;
-	
+	private Timer timer;
+	private int currentIndex;
 	public DisplayPanel(Missile currentMissile, Player currentPlayer, Target currentTarget) {
 		this.currentTarget = currentTarget;
 		this.currentMissile = currentMissile;
+		missileStartX = currentMissile.getX();
+		missileStartY = currentMissile.getY();
 		this.currentPlayer = currentPlayer;
+		timer = new Timer(10, new TimerListener());
 		//printValues();
 	}
 	public Target getCurrentTarget() {
@@ -62,13 +71,7 @@ public class DisplayPanel extends JPanel{
 			JOptionPane.showMessageDialog(null, "You must enter an angle before launching the missile!", "Invalid input", JOptionPane.INFORMATION_MESSAGE);
 			return;
 		}
-		for( Point pathPoint: launchPoints ){
-			currentMissile.setX(pathPoint.x);
-			currentMissile.setY(pathPoint.y);
-			if( currentMissile.isColliding(currentTarget) ){
-				return;
-			}
-		}
+		timer.start();
 	}
 	public void printValues(){
 		System.out.println(currentTarget.getName());
@@ -81,14 +84,41 @@ public class DisplayPanel extends JPanel{
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		g.setColor(Color.CYAN);
-		System.out.println(currentMissile.getScreenX());
-		System.out.println(currentMissile.getScreenY());
 		g.fillRect(0, 0, currentMissile.getScreenX(), (int)((double)currentMissile.getScreenY()/2));
 		g.setColor(Color.GREEN);
 		g.fillRect(0, (int)(((double)currentMissile.getScreenY())/2), currentMissile.getScreenX(), (int)((double)currentMissile.getScreenY()/2));
-		//currentTarget.draw(g);
-		//currentMissile.draw(g);
-		//currentPlayer.draw(g);
-		
+		currentTarget.draw(g);
+		currentMissile.draw(g);
+		currentPlayer.draw(g);
+	}
+	
+	private class TimerListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			repaint(); 
+			shootHelper();
+		}
+	}
+	
+	private void shootHelper() {
+		// more complex logic is probably needed to determine when to stop
+		if( currentMissile.isColliding(currentTarget) ){
+			currentIndex = 0;
+			timer.stop();
+			currentMissile.setX(missileStartX);
+			currentMissile.setY(missileStartY);
+		}
+		else if(currentIndex >= launchPoints.size()){
+			currentIndex = 0;
+			timer.stop();
+			currentMissile.setX(missileStartX);
+			currentMissile.setY(missileStartY);
+		}
+		else {
+			Point pathPoint = launchPoints.get(currentIndex);
+			currentMissile.setX(pathPoint.x);
+			currentMissile.setY(pathPoint.y);
+			currentIndex++;
+			
+		}
 	}
 }
