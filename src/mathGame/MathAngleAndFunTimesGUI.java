@@ -192,7 +192,7 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 	
 	public double getGravity(){
 		return gravity;
-	}
+	}  
 	
 	public Point getPersonStart(){
 		return personStart;
