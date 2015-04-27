@@ -37,7 +37,12 @@ public class Missile {
 		}
 		return false;
 	}
-	public void drawPath( Graphics g ){}
+	public void drawPath( Graphics g ){
+		g.setColor(Color.RED);
+		for (int i = 0; i < launchPoints.size(); i++){
+			g.fillOval((int)(launchPoints.get(i).getX()),(int)(launchPoints.get(i).getY()),6,6);
+		}
+	}
 	public ArrayList<Point> calcPath(double inputAngle, double intialVelocity ){
 		int nextX = this.x;
 		int nextY = this.y;
