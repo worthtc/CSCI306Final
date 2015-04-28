@@ -1,6 +1,11 @@
 package mathGame;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 
 public class Target {
@@ -9,9 +14,16 @@ public class Target {
 	private int width;
 	private int height;
 	private String name;
+	private BufferedImage img = null;
 	public void draw( Graphics g ){
-		g.setColor(Color.MAGENTA);
-		g.fillOval(x, y, width, height);
+		try{
+			img = ImageIO.read(new File("src/images/"+name+"_target.png"));
+		}catch(IOException e){
+			System.out.println(e);
+		}
+		g.drawImage(img, x, y, null);
+		//g.setColor(Color.MAGENTA);
+		//g.fillOval(x, y, width, height);
 	}
 	
 	public int getX(){
