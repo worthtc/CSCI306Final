@@ -118,6 +118,10 @@ public class ControlPanel extends JPanel{
 					JOptionPane.showMessageDialog(null,"Please answer the question");
 					return;
 				}
+				if(display.isLaunching()){
+					JOptionPane.showMessageDialog(null,"Please wait for the launch to finish.");
+					return;
+				}
 				if(display.getScore()> 0 && (display.getScore()%10) == 0 && !hasAnswered){
 					hasAnswered = true;
 					Question askQ = controlGUI.askQuestion();
@@ -215,6 +219,10 @@ public class ControlPanel extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try{
+				if(display.isLaunching()){
+					JOptionPane.showMessageDialog(null,"Please wait for the launch to finish.");
+					return;
+				}
 				String input = angleInput.getText();
 				angle = Double.parseDouble(input);
 				if( !(angle >= 0) || !(angle <= maxAngle)){ //checks to ensure the user inputed the correct angle with in certian bounds
@@ -236,6 +244,10 @@ public class ControlPanel extends JPanel{
 		public void actionPerformed(ActionEvent e)
 		{
 			try{
+				if(display.isLaunching()){
+					JOptionPane.showMessageDialog(null,"Please wait for the launch to finish.");
+					return;
+				}
 				String input = velocityInput.getText();
 				velocity = Double.parseDouble(input);
 				if( !(velocity >= minVelocity) || !(velocity <= maxVelocity)){

@@ -27,6 +27,7 @@ public class DisplayPanel extends JPanel{
 	private Timer timer;
 	private int currentIndex;
 	private boolean drawPath;
+	private boolean isLaunching;
 	public DisplayPanel(Missile currentMissile, Player currentPlayer, Target currentTarget) {
 		this.currentTarget = currentTarget;
 		this.currentMissile = currentMissile;
@@ -76,6 +77,7 @@ public class DisplayPanel extends JPanel{
 			JOptionPane.showMessageDialog(null, "You must enter an angle before launching the missile!", "Invalid input", JOptionPane.INFORMATION_MESSAGE);
 			return;
 		}
+		isLaunching = true;
 		timer.start();
 	}
 	public void printValues(){
@@ -122,12 +124,14 @@ public class DisplayPanel extends JPanel{
 			}
 			score++;
 			scoreField.setText(new Integer(score).toString());
+			isLaunching = false;
 		}
 		else if(currentIndex >= launchPoints.size()){
 			currentIndex = 0;
 			timer.stop();
 			currentMissile.setX(missileStartX);
 			currentMissile.setY(missileStartY);
+			isLaunching = false;
 		}
 		else {
 			Point pathPoint = launchPoints.get(currentIndex);
@@ -153,6 +157,12 @@ public class DisplayPanel extends JPanel{
 	}
 	public JTextField getScoreField() {
 		return scoreField;
+	}
+	public boolean isLaunching() {
+		return isLaunching;
+	}
+	public void setLaunching(boolean isLaunching) {
+		this.isLaunching = isLaunching;
 	}
 	
 }
