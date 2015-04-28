@@ -16,7 +16,7 @@ public class Target {
 	private BufferedImage img = null;
 	public void draw( Graphics g ){
 		try{
-			img = ImageIO.read(new File("src/images/"+name+"_target.png"));
+			img = ImageIO.read(new File("/images/"+name+"_target.png"));
 		}catch(IOException e){
 			System.out.println(e);
 		}
