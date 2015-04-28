@@ -1,5 +1,4 @@
 package mathGame;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -22,8 +21,6 @@ public class Target {
 			System.out.println(e);
 		}
 		g.drawImage(img, x, y, null);
-		//g.setColor(Color.MAGENTA);
-		//g.fillOval(x, y, width, height);
 	}
 	
 	public int getX(){

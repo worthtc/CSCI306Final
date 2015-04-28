@@ -1,5 +1,4 @@
 package mathGame;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -27,8 +26,6 @@ public class Player {
 			System.out.println(e);
 		}
 		g.drawImage(img,  x,  y,  null);
-		//g.setColor(Color.BLACK);
-		//g.fillRect(x, y, 5, 5);
 	}
 	public int getX() {
 		return x;

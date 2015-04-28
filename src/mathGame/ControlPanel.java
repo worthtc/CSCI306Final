@@ -264,6 +264,7 @@ public class ControlPanel extends JPanel{
 			else if( e.getSource() == possibleTargets){
 				display.getCurrentTarget().setName(possibleTargets.getSelectedItem().toString());
 			}
+			display.repaint();
 		}
 	}
 	public void setAnswering(boolean isAnswering) {

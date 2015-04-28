@@ -1,7 +1,6 @@
 package mathGame;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -39,8 +38,6 @@ public class Missile {
 			System.out.println(e);
 		}
 		g.drawImage(img,  x-50,  y-25,  null);
-		//g.setColor(Color.RED);
-		//g.fillRect(x, y, 5, 5);
 	}
 	public boolean isColliding( Target boardTarget){
 		if (x >= boardTarget.getX() && x <= boardTarget.getX() + boardTarget.getWidth()){
