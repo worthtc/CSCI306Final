@@ -42,6 +42,7 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 		}catch(BadConfigFormatException e){
 			System.out.println(e);
 		}
+		//Initialize the GUI
 		Missile startMissile = new Missile((int)missileStart.getX(), (int)missileStart.getY(), missileTypes.get(0));
 		Player startPlayer = new Player((int)personStart.getX(), (int)personStart.getY(), personTypes.get(0));
 		Target startTarget = new Target((int)targetStart.getX(), (int)targetStart.getY(), targetWidth, targetHeight, targetTypes.get(0));
@@ -60,7 +61,7 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 		setJMenuBar(controlGUI.getFileMenuBar());
 		setVisible(true);
 	}
-	
+	//Constructor for BadConfig Tests
 	public void MAAFTGUITestConstructor(String filename) throws BadConfigFormatException{
 		this.setResizable(false);
 		this.filename = filename;
@@ -69,7 +70,7 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 		targetTypes = new ArrayList<String>();
 		controlGUI = new ControlPanel();
 		loadConfigFiles();
-		/*controlGUI.setDisplay(displayPanel);
+		controlGUI.setDisplay(displayPanel);
 		controlGUI.setupGUI(missileTypes, personTypes, targetTypes);
 		setSize(screenX, screenY);
 		setTitle("Math and Angles Fun Times!");// Note: title is a work in progress
@@ -77,116 +78,112 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 		add(controlGUI, BorderLayout.NORTH);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setJMenuBar(controlGUI.getFileMenuBar());
-		setVisible(true);*/
+		setVisible(true);
 	}
 	
 	public void loadConfigFiles() throws BadConfigFormatException{
-		try{
-			//FileReader configReader = new FileReader(filename);
-			InputStream configReader = getClass().getResourceAsStream(filename);
-			Scanner inf = new Scanner(configReader);
-			String currentLine = inf.nextLine();
-			String[] lineParse = currentLine.split(" ");
-			if(lineParse.length > 2){
-				inf.close();
-				throw new BadConfigFormatException("The first line must have exactly 2 integers for the height and width of the frame!");
-			}
-			try{
-				screenX = Integer.parseInt(lineParse[0]);
-				screenY = Integer.parseInt(lineParse[1]);
-			}catch(NumberFormatException e){
-				System.out.println(e);
-			}
-			while(inf.hasNextLine()){
-				currentLine = inf.nextLine();
-				lineParse = currentLine.split(":");
-				switch(lineParse[0]){
-				case "Missile":
-					if(lineParse.length != 3){
-						inf.close();
-						throw new BadConfigFormatException("Missile cannot be given more than two coordinates!");
-					}
-					missileStart = new Point(Integer.parseInt(lineParse[1]), Integer.parseInt(lineParse[2]));
-					break;
-				case "MissileType":
-					if(lineParse.length != 2){
-						inf.close();
-						throw new BadConfigFormatException("MissileType lines cannot be followed by more than one string name!" + lineParse[1] + " " + lineParse[2]);
-					}
-					missileTypes.add(lineParse[1]);
-					break;
-				case "Person":
-					if(lineParse.length != 3){
-						inf.close();
-						throw new BadConfigFormatException("Person cannot have more than two coordinates!");
-					}
-					personStart = new Point(Integer.parseInt(lineParse[1]),Integer.parseInt(lineParse[2]));
-					break;
-				case "PersonType":
-					if(lineParse.length != 2){
-						inf.close();
-						throw new BadConfigFormatException("PersonType lines cannot be followed by more than one string name!" + lineParse[1] + " " + lineParse[2]);
-					}
-					personTypes.add(lineParse[1]);
-					break;
-				case "Gravity":
-					if(lineParse.length != 2){
-						inf.close();
-						throw new BadConfigFormatException("Gravity must be followed by exactly one string, and that string must contain a double.");
-					}
-					try{
-						gravity = Double.parseDouble(lineParse[1]);
-					}catch(NumberFormatException e){
-						System.out.println(e);
-						inf.close();
-						throw new BadConfigFormatException("The value after Gravity was not a double!");
-					}
-					break;
-				case "Target":
-					if(lineParse.length != 5){
-						inf.close();
-						throw new BadConfigFormatException("Target cannot have more than a startX, a startY, a width, and a height!");
-					}
-					targetStart = new Point(Integer.parseInt(lineParse[1]),Integer.parseInt(lineParse[2]));
-					targetWidth = Integer.parseInt(lineParse[3]);
-					targetHeight = Integer.parseInt(lineParse[4]);
-					break;
-				case "TargetType":
-					if(lineParse.length != 2){
-						inf.close();
-						throw new BadConfigFormatException("Can't have more than one name for a target!");
-					}
-					targetTypes.add(lineParse[1]);
-					break;
-				case "Question":
-					if(lineParse.length != 2){
-						inf.close();
-						throw new BadConfigFormatException("Cannot have more than one question part!");
-					}
-					String ans = inf.nextLine();
-					String[] answer = ans.split(":");
-					if(!answer[0].equals("Answer")){
-						inf.close();
-						throw new BadConfigFormatException("Questions must be followed by Answers!");
-					}
-					if(answer.length != 2){
-						inf.close();
-						throw new BadConfigFormatException("Answers can't have more than one text body!");
-					}
-					controlGUI.addQuestion(new Question(lineParse[1], answer[1], controlGUI));
-					break;
-				case "Answer":
-					inf.close();
-					throw new BadConfigFormatException("Answers must only follow questions!");
-				default:
-					inf.close();
-					throw new BadConfigFormatException("The keyword " + lineParse[0] + " is not a valid keyword to start a line.");
-				}
-			}
+		InputStream configReader = getClass().getResourceAsStream(filename);
+		Scanner inf = new Scanner(configReader);
+		String currentLine = inf.nextLine();
+		String[] lineParse = currentLine.split(" ");
+		if(lineParse.length > 2){
 			inf.close();
-		}catch(Exception e){
+			throw new BadConfigFormatException("The first line must have exactly 2 integers for the height and width of the frame!");
+		}
+		try{
+			screenX = Integer.parseInt(lineParse[0]);
+			screenY = Integer.parseInt(lineParse[1]);
+		}catch(NumberFormatException e){
 			System.out.println(e);
 		}
+		while(inf.hasNextLine()){
+			currentLine = inf.nextLine();
+			lineParse = currentLine.split(":");
+			//Based off the first string, see what type of data we are dealing with
+			switch(lineParse[0]){
+			case "Missile":
+				if(lineParse.length != 3){
+					inf.close();
+					throw new BadConfigFormatException("Missile cannot be given more than two coordinates!");
+				}
+				missileStart = new Point(Integer.parseInt(lineParse[1]), Integer.parseInt(lineParse[2]));
+				break;
+			case "MissileType":
+				if(lineParse.length != 2){
+					inf.close();
+					throw new BadConfigFormatException("MissileType lines cannot be followed by more than one string name!" + lineParse[1] + " " + lineParse[2]);
+				}
+				missileTypes.add(lineParse[1]);
+				break;
+			case "Person":
+				if(lineParse.length != 3){
+					inf.close();
+					throw new BadConfigFormatException("Person cannot have more than two coordinates!");
+				}
+				personStart = new Point(Integer.parseInt(lineParse[1]),Integer.parseInt(lineParse[2]));
+				break;
+			case "PersonType":
+				if(lineParse.length != 2){
+					inf.close();
+					throw new BadConfigFormatException("PersonType lines cannot be followed by more than one string name!" + lineParse[1] + " " + lineParse[2]);
+				}
+				personTypes.add(lineParse[1]);
+				break;
+			case "Gravity":
+				if(lineParse.length != 2){
+					inf.close();
+					throw new BadConfigFormatException("Gravity must be followed by exactly one string, and that string must contain a double.");
+				}
+				try{
+					gravity = Double.parseDouble(lineParse[1]);
+				}catch(NumberFormatException e){
+					System.out.println(e);
+					inf.close();
+					throw new BadConfigFormatException("The value after Gravity was not a double!");
+				}
+				break;
+			case "Target":
+				if(lineParse.length != 5){
+					inf.close();
+					throw new BadConfigFormatException("Target cannot have more than a startX, a startY, a width, and a height!");
+				}
+				targetStart = new Point(Integer.parseInt(lineParse[1]),Integer.parseInt(lineParse[2]));
+				targetWidth = Integer.parseInt(lineParse[3]);
+				targetHeight = Integer.parseInt(lineParse[4]);
+				break;
+			case "TargetType":
+				if(lineParse.length != 2){
+					inf.close();
+					throw new BadConfigFormatException("Can't have more than one name for a target!");
+				}
+				targetTypes.add(lineParse[1]);
+				break;
+			case "Question":
+				if(lineParse.length != 2){
+					inf.close();
+					throw new BadConfigFormatException("Cannot have more than one question part!");
+				}
+				String ans = inf.nextLine();
+				String[] answer = ans.split(":");
+				if(!answer[0].equals("Answer")){
+					inf.close();
+					throw new BadConfigFormatException("Questions must be followed by Answers!");
+				}
+				if(answer.length != 2){
+					inf.close();
+					throw new BadConfigFormatException("Answers can't have more than one text body!");
+				}
+				controlGUI.addQuestion(new Question(lineParse[1], answer[1], controlGUI));
+				break;
+			case "Answer":
+				inf.close();
+				throw new BadConfigFormatException("Answers must only follow questions!");
+			default:
+				inf.close();
+				throw new BadConfigFormatException("The keyword " + lineParse[0] + " is not a valid keyword to start a line.");
+			}
+		}
+		inf.close();
 	}
 	
 	public ArrayList<String> getMissileTypes(){

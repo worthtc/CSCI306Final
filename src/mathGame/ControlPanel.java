@@ -40,6 +40,7 @@ public class ControlPanel extends JPanel{
 	private boolean isAnswering;
 	private boolean hasAnswered;
 	
+	//Asks a random question from the list
 	public Question askQuestion(){
 		int index = (int) (Math.random()*possibleQuestions.size());
 		return possibleQuestions.get(index);
@@ -51,14 +52,12 @@ public class ControlPanel extends JPanel{
 		playerChoices = new ArrayList<Player>();
 		targetChoices = new ArrayList<Target>();
 		possibleQuestions = new ArrayList<Question>();
-		//JLabel targetLabel = new JLabel("Targets:");
 		possibleTargets = new JComboBox<String>();
-		//JLabel missilesLabel = new JLabel("Missiles");
 		possibleMissiles = new JComboBox<String>();
-		//JLabel playersLabel = new JLabel("Characters");
 		possiblePlayers = new JComboBox<String>();
 	}
 
+	//Methods to add all the items to the various Combo Boxes
 	private  JComboBox<String> createPlayersCombo()  {
 		for(Player p:playerChoices){
 			possiblePlayers.addItem(p.getName());
@@ -82,26 +81,7 @@ public class ControlPanel extends JPanel{
 		return possibleTargets;
 		
 	}
-	public void addQuestion( Question newQuestion ){
-		possibleQuestions.add(newQuestion);
-	}
-
-	public ArrayList<Question> getPossibleQuestions() {
-		return possibleQuestions;
-	}
-
-	public JMenuBar getFileMenuBar() {
-		return fileMenuBar;
-	}
-
-	public double getAngle() {
-		return angle;
-	}
-
-	public void setDisplay(DisplayPanel display) {
-		this.display = display;
-	}
-	
+	//Creates all the elements for the graphic interface
 	public void setupGUI(ArrayList<String> missileTypes, ArrayList<String> playerTypes, ArrayList<String> targetTypes){
 		for( String missileString: missileTypes ){
 			Missile m = display.getCurrentMissile();
@@ -116,16 +96,16 @@ public class ControlPanel extends JPanel{
 			targetChoices.add(new Target(t.getX(), t.getY(), t.getWidth(), t.getHeight(), targetString));
 		}
 		JMenu fileMenu = new JMenu("File");
-		//JLabel angleLabel = new JLabel("Input Angle:");
+		
 		velocityInput = new JTextField(5);
 		velocityInput.setText("0");
 		JButton velocityInputButton = new JButton("Enter");
-		
 		velocityInputButton.addActionListener( new VelocityListener());
 		
 		angleInput = new JTextField(5);
 		angleInput.setText("0");
 		JButton angleInputButton = new JButton("Enter");
+		//Action listener that actually moves the missile
 		class LaunchListener implements ActionListener {
 			ControlPanel controlGUI;
 			public LaunchListener(ControlPanel control){
@@ -133,12 +113,12 @@ public class ControlPanel extends JPanel{
 			}
 			public void actionPerformed(ActionEvent e)
 			{
+				//If we are answering a question, do not allow another to be asked
 				if( isAnswering ){
 					JOptionPane.showMessageDialog(null,"Please answer the question");
 					return;
 				}
 				if(display.getScore()> 0 && (display.getScore()%10) == 0 && !hasAnswered){
-				//if(display.getScore()> 0 && !hasAnswered){
 					hasAnswered = true;
 					Question askQ = controlGUI.askQuestion();
 		    		askQ.askYesNoQuestion();
@@ -150,7 +130,6 @@ public class ControlPanel extends JPanel{
 					display.setDrawPath(false);
 					display.launchMissile();
 				}
-				//scoreField.setText(new Integer(display.getScore()).toString());
 				
 			}
 		}
@@ -162,6 +141,7 @@ public class ControlPanel extends JPanel{
 				System.exit(0);
 			}
 		}
+		//Create seperate panels to hold all the items and look nice
 		JMenuItem exit = new JMenuItem("Exit");
 		exit.addActionListener(new ExitListener());
 		fileMenu.add(exit);
@@ -230,7 +210,7 @@ public class ControlPanel extends JPanel{
 		looksPanel.add(inputPanel, BorderLayout.CENTER);
 		this.add(looksPanel);
 	}
-	
+	//ActionListener to allow the user to input an angle
 	class AngleButtonListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -248,11 +228,10 @@ public class ControlPanel extends JPanel{
 			}
 			display.setAngle(angle);
 			display.setLaunchPoints(display.getCurrentMissile().calcPath(display.getAngle(), display.getVelocity() ));
-			//display.getCurrentMissile().drawPath(getGraphics());
 			display.setDrawPath(true);
 		}
 	}
-	
+	//ActionListener to allow the user to input an velocity
 	class VelocityListener implements ActionListener{
 		public void actionPerformed(ActionEvent e)
 		{
@@ -270,7 +249,6 @@ public class ControlPanel extends JPanel{
 			}
 			display.setVelocity(velocity);
 			display.setLaunchPoints(display.getCurrentMissile().calcPath(display.getAngle(), display.getVelocity() ));
-			//display.getCurrentMissile().drawPath(getGraphics());
 			display.setDrawPath(true);
 		}
 	}
@@ -295,6 +273,24 @@ public class ControlPanel extends JPanel{
 	public DisplayPanel getDisplay() {
 		return display;
 	}
-	
+	public void addQuestion( Question newQuestion ){
+		possibleQuestions.add(newQuestion);
+	}
+
+	public ArrayList<Question> getPossibleQuestions() {
+		return possibleQuestions;
+	}
+
+	public JMenuBar getFileMenuBar() {
+		return fileMenuBar;
+	}
+
+	public double getAngle() {
+		return angle;
+	}
+
+	public void setDisplay(DisplayPanel display) {
+		this.display = display;
+	}
 }
 
