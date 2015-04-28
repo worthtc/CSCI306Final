@@ -117,8 +117,8 @@ public class DisplayPanel extends JPanel{
 			currentTarget.setX((int) (Math.random()*this.getSize().getWidth()));
 			currentTarget.setY((int) (Math.random()*this.getSize().getHeight()));
 			while( currentMissile.isColliding(currentTarget) ){
-				currentTarget.setX((int) (Math.random()*this.getSize().getWidth()));
-				currentTarget.setY((int) (Math.random()*this.getSize().getHeight()));
+				currentTarget.setX((int) (Math.random()*(this.getSize().getWidth()-100)));
+				currentTarget.setY((int) (Math.random()*(this.getSize().getHeight()-150)));
 			}
 			score++;
 			scoreField.setText(new Integer(score).toString());
