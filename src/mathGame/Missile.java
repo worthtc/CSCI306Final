@@ -2,10 +2,10 @@ package mathGame;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
-import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
@@ -34,8 +34,7 @@ public class Missile {
 	}
 	public void draw( Graphics g ){
 		try{
-			img = ImageIO.read(new File("/images/"+name+"_missile.png"));
-			//img = ImageIO.read(getClass().getResource("/images/"+name+"_missile.png"));
+			img = ImageIO.read(getClass().getResource("/images/"+name+"_missile.png"));
 
 		}catch(IOException e){
 			System.out.println(e);
