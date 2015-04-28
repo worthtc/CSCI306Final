@@ -55,8 +55,8 @@ public class ConfigFileTests {
 	
 	@Test
 	public void testQuestionList(){
-		Question q1 = new Question("Which trigonometric function can equal or be greater than 1.000?", "Tangent" );
-		Question q2 = new Question("If Sin angle A = 0.358, then does angle A = 21°? True or False", "True" );
+		Question q1 = new Question("Which trigonometric function can equal or be greater than 1.000?", "Tangent", game.getControlGUI() );
+		Question q2 = new Question("If Sin angle A = 0.358, then does angle A = 21°? True or False", "True", game.getControlGUI() );
 		boolean check1 = false;
 		boolean check2 = false;
 		ArrayList<Question> temp = game.getControlGUI().getPossibleQuestions();
