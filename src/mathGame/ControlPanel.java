@@ -37,6 +37,9 @@ public class ControlPanel extends JPanel{
 	private ArrayList<Player> playerChoices;
 	private DisplayPanel display;
 	private JTextField velocityInput;
+	private boolean isAnswering;
+	private boolean hasAnswered;
+	
 	public Question askQuestion(){
 		int index = (int) (Math.random()*possibleQuestions.size());
 		return possibleQuestions.get(index);
@@ -121,13 +124,32 @@ public class ControlPanel extends JPanel{
 		velocityInputButton.addActionListener( new VelocityListener());
 		
 		angleInput = new JTextField(5);
+		angleInput.setText("0");
 		JButton angleInputButton = new JButton("Enter");
 		class LaunchListener implements ActionListener {
+			ControlPanel controlGUI;
+			public LaunchListener(ControlPanel control){
+				controlGUI = control;
+			}
 			public void actionPerformed(ActionEvent e)
 			{
-				display.setDrawPath(false);
-				display.launchMissile();
-				
+				if( isAnswering ){
+					JOptionPane.showMessageDialog(null,"Please answer the question");
+					return;
+				}
+				if(display.getScore()> 0 && (display.getScore()%10) == 0 && !hasAnswered){
+				//if(display.getScore()> 0 && !hasAnswered){
+					hasAnswered = true;
+					Question askQ = controlGUI.askQuestion();
+		    		askQ.askYesNoQuestion();
+		    		isAnswering = true;
+				}
+				else{
+					if( (display.getScore()%10) != 0)
+						hasAnswered = false;
+					display.setDrawPath(false);
+					display.launchMissile();
+				}
 				//scoreField.setText(new Integer(display.getScore()).toString());
 				
 			}
@@ -186,7 +208,7 @@ public class ControlPanel extends JPanel{
 		this.add(inputPanel);
 		
 		JButton launchButton = new JButton("Launch");
-		launchButton.addActionListener(new LaunchListener());
+		launchButton.addActionListener(new LaunchListener(this));
 		
 		scoreField = new JTextField(5);
 		display.setScoreField(scoreField);
@@ -219,12 +241,6 @@ public class ControlPanel extends JPanel{
 					JOptionPane.showMessageDialog(null, "Please enter a number between " + minAngle + " and " + maxAngle, "Invalid input", JOptionPane.INFORMATION_MESSAGE);
 					return;
 				}
-				
-				if(display.getScore()> 0 && (display.getScore()%10) == 0){
-					Question gui = new Question(askQuestion().getQuestionText(),askQuestion().getAnswerText());
-		    		
-		    		gui.setVisible(true);
-				}
 			}
 			catch( NumberFormatException exc){
 				JOptionPane.showMessageDialog(null, "Please enter a number between " + minAngle + " and " + maxAngle, "Invalid input", JOptionPane.INFORMATION_MESSAGE);
@@ -236,6 +252,7 @@ public class ControlPanel extends JPanel{
 			display.setDrawPath(true);
 		}
 	}
+	
 	class VelocityListener implements ActionListener{
 		public void actionPerformed(ActionEvent e)
 		{
@@ -271,5 +288,13 @@ public class ControlPanel extends JPanel{
 			}
 		}
 	}
+	public void setAnswering(boolean isAnswering) {
+		this.isAnswering = isAnswering;
+	}
+
+	public DisplayPanel getDisplay() {
+		return display;
+	}
+	
 }
 

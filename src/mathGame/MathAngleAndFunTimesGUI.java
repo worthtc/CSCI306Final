@@ -173,7 +173,7 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 						inf.close();
 						throw new BadConfigFormatException("Answers can't have more than one text body!");
 					}
-					controlGUI.addQuestion(new Question(lineParse[1], answer[1]));
+					controlGUI.addQuestion(new Question(lineParse[1], answer[1], controlGUI));
 					break;
 				case "Answer":
 					inf.close();

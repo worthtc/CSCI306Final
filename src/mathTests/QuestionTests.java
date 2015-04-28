@@ -13,8 +13,8 @@ public class QuestionTests {
 	private ControlPanel questionAsker;
 	@Before
 	public void setUp() throws Exception {
-		q1 = new Question( "This is a test Question", "This is the answer");
-		q2 = new Question( "This is another test Question", "answer");
+		q1 = new Question( "This is a test Question", "This is the answer", questionAsker);
+		q2 = new Question( "This is another test Question", "answer", questionAsker);
 		questionAsker = new ControlPanel();
 		questionAsker.addQuestion(q1);
 		questionAsker.addQuestion(q2);

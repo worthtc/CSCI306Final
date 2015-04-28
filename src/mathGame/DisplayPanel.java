@@ -140,6 +140,10 @@ public class DisplayPanel extends JPanel{
 	public int getScore() {
 		return score;
 	}
+	
+	public void setScore(int score) {
+		this.score = score;
+	}
 	public void setScoreField(JTextField scoreField) {
 		this.scoreField = scoreField;
 	}
