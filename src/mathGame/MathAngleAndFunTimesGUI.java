@@ -52,7 +52,7 @@ public class MathAngleAndFunTimesGUI extends JFrame{
 		controlGUI.setDisplay(displayPanel);
 		controlGUI.setupGUI(missileTypes, personTypes, targetTypes);
 		setSize(screenX, screenY);
-		setTitle("Math and Angles Fun Times!");// Note: title is a work in progress
+		setTitle("Math Angle and Fun Times!");// Note: title is a work in progress
 		setLayout(new BorderLayout());
 		add(controlGUI, BorderLayout.NORTH);
 		add(displayPanel, BorderLayout.CENTER);
