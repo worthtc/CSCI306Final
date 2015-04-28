@@ -14,13 +14,13 @@ public class Question{
 	private JFrame yesNoPanel;
 	private ControlPanel controlGUI;
 	
-	public boolean checkAnswer( String answer){
+	public boolean checkAnswer( String answer){//checks the answer to see if it is the right answer or not
 		if(answer.equals(this.answer)){
 			return true;
 		}
 		return false;
 	}
-	public boolean checkQuestion( String q){
+	public boolean checkQuestion( String q){//checks the question used to see if a valid question is asked
 		if(q.equals(this.questionText)){
 			return true;
 		}
@@ -40,7 +40,7 @@ public class Question{
 	public String getAnswerText(){
 		return answer;
 	}
-	private JButton submitSetup(){
+	private JButton submitSetup(){ //what happens when you hit the yes button on the pop up screen,it asks a question then allows you to answer
 	 JButton temp = new JButton("yes");
 	 class YesListener implements ActionListener{
 		Question quest;
@@ -76,7 +76,7 @@ public class Question{
 				this.answerField = answerField;
 			}
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) { //this checks if you got the right answer or not, if you got it right you get a 5 point increase
 				String playerAnswer = answerField.getText();
 				if(checkAnswer(playerAnswer)){
 					JOptionPane.showMessageDialog(null,"You got it right, Five bonus points!");
@@ -107,7 +107,7 @@ public class Question{
 		questionPanel.setVisible(true);
 		
 	}
-	private JButton noSetup(){
+	private JButton noSetup(){//what happens when you hit the no button on the pop up screen, it jsut closes the window
 		JButton temp = new JButton("no");
 		class NoListener implements ActionListener{
 			@Override

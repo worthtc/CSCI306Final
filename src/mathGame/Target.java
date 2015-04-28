@@ -37,6 +37,7 @@ public class Target {
 	public int getHeight(){
 		return height;
 	}
+	//sets the variables needed for the target 
 	public void setWidth(int w){
 		 this.width = w;
 	}
@@ -54,7 +55,7 @@ public class Target {
 		super();
 	}
 
-	public Target(int x, int y, int width, int height, String name) {
+	public Target(int x, int y, int width, int height, String name) {//sets up the target used on the screen
 		super();
 		this.x = x;
 		this.y = y;
