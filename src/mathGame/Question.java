@@ -61,7 +61,7 @@ public class Question{
 	public void askQuestion() {
 		JFrame questionPanel = new JFrame();
 		questionPanel.setTitle("Your Question!");
-		questionPanel.setSize(600,600);
+		questionPanel.setSize(800,600);
 		JTextField question = new JTextField(200);
 		question.setEditable(false);
 		JTextField answerField = new JTextField(20);
@@ -79,11 +79,11 @@ public class Question{
 			public void actionPerformed(ActionEvent e) { //this checks if you got the right answer or not, if you got it right you get a 5 point increase
 				String playerAnswer = answerField.getText();
 				if(checkAnswer(playerAnswer)){
-					JOptionPane.showMessageDialog(null,"You got it right, Five bonus points!");
+					JOptionPane.showMessageDialog(null,"You got it right, Two bonus points!");
 					controlGUI.setAnswering(false);
 					controlGUI.getDisplay().setDrawPath(false);
 					controlGUI.getDisplay().launchMissile();
-					controlGUI.getDisplay().setScore(controlGUI.getDisplay().getScore() + 5);
+					controlGUI.getDisplay().setScore(controlGUI.getDisplay().getScore() + 2);
 					controlGUI.getDisplay().getScoreField().setText(new Integer(controlGUI.getDisplay().getScore()).toString());
 					frame.dispose();
 					

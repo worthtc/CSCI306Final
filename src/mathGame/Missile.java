@@ -8,8 +8,6 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
-
-
 public class Missile {
 	private int x;
 	private int y;
@@ -30,6 +28,7 @@ public class Missile {
 	public void setY(int y) {
 		this.y = y;
 	}
+	//Draw the image for the missile
 	public void draw( Graphics g ){
 		try{
 			img = ImageIO.read(getClass().getResource("/images/"+name+"_missile.png"));
@@ -39,6 +38,7 @@ public class Missile {
 		}
 		g.drawImage(img,  x-50,  y-25,  null);
 	}
+	//Check to see if the missile has hit the target
 	public boolean isColliding( Target boardTarget){
 		if (x >= boardTarget.getX() && x <= boardTarget.getX() + boardTarget.getWidth()){
 			if (y >= boardTarget.getY() && y <= boardTarget.getY() + boardTarget.getHeight()){

@@ -12,11 +12,11 @@ TargetType:Tree
 TargetType:Dragon
 TargetType:Target
 Gravity:10
-Question:Which trigonometric function can equal or be greater than 1.000?
+Question:Which trigonometric function can equal or be greater than 1.000?(Sine, Cosine, or Tangent)
 Answer:Tangent
-Question:Which set of angles has the same trigonometric ratio?
-Answer:sin 30 and cos 60
-Question:If Sin angle A = 0.358, then does angle A = 21°? True or False
+Question:Does sin 30 = cos 60? (Yes or No)
+Answer:Yes
+Question:If Sin angle A = 0.358, then does angle A = 21°?(True or False)
 Answer:True
-Question: The sum of the sine of an angle and the cosine of its complement is always greater than 1.000? True or False
+Question: The sum of the sine of an angle and the cosine of its complement is always greater than 1.000?(True or False)
 Answer:False

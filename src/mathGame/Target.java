@@ -34,7 +34,7 @@ public class Target {
 	public int getHeight(){
 		return height;
 	}
-	//sets the variables needed for the target 
+	//Sets the variables needed for the target 
 	public void setWidth(int w){
 		 this.width = w;
 	}

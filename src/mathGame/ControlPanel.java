@@ -118,18 +118,19 @@ public class ControlPanel extends JPanel{
 					JOptionPane.showMessageDialog(null,"Please answer the question");
 					return;
 				}
+				//If we are already launching, we cannot launch again
 				if(display.isLaunching()){
 					JOptionPane.showMessageDialog(null,"Please wait for the launch to finish.");
 					return;
 				}
-				if(display.getScore()> 0 && (display.getScore()%10) == 0 && !hasAnswered){
+				if(display.getScore()> 0 && (display.getScore()%5) == 0 && !hasAnswered){
 					hasAnswered = true;
 					Question askQ = controlGUI.askQuestion();
 		    		askQ.askYesNoQuestion();
 		    		isAnswering = true;
 				}
 				else{
-					if( (display.getScore()%10) != 0)
+					if( (display.getScore()%5) != 0)
 						hasAnswered = false;
 					display.setDrawPath(false);
 					display.launchMissile();
@@ -219,6 +220,7 @@ public class ControlPanel extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try{
+				//If we are already launching, we cannot enter a new angle
 				if(display.isLaunching()){
 					JOptionPane.showMessageDialog(null,"Please wait for the launch to finish.");
 					return;
@@ -244,6 +246,7 @@ public class ControlPanel extends JPanel{
 		public void actionPerformed(ActionEvent e)
 		{
 			try{
+				//If we are already launching, we cannot enter a new velocity
 				if(display.isLaunching()){
 					JOptionPane.showMessageDialog(null,"Please wait for the launch to finish.");
 					return;

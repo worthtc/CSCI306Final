@@ -49,8 +49,8 @@ public class ConfigFileTests {
 		//Assure that the various information regarding the placement of objects on screen is correctly loaded
 		Point ps = game.getPersonStart();
 		Point ms = game.getMissileStart();
-		assertEquals(ps, new Point(50, 500));
-		assertEquals(ms, new Point(100, 500));
+		assertEquals(ps, new Point(0, 425));
+		assertEquals(ms, new Point(175, 475));
 	}
 	
 	@Test
