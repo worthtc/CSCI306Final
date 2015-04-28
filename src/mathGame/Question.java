@@ -85,6 +85,7 @@ public class Question{
 					controlGUI.getDisplay().setDrawPath(false);
 					controlGUI.getDisplay().launchMissile();
 					controlGUI.getDisplay().setScore(controlGUI.getDisplay().getScore() + 5);
+					controlGUI.getDisplay().getScoreField().setText(new Integer(controlGUI.getDisplay().getScore()).toString());
 					frame.dispose();
 					
 				} 

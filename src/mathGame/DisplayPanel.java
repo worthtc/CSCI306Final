@@ -151,5 +151,8 @@ public class DisplayPanel extends JPanel{
 		this.drawPath = drawPath;
 		this.repaint();
 	}
+	public JTextField getScoreField() {
+		return scoreField;
+	}
 	
 }
