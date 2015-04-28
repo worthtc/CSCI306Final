@@ -217,7 +217,7 @@ public class ControlPanel extends JPanel{
 			try{
 				String input = angleInput.getText();
 				angle = Double.parseDouble(input);
-				if( !(angle >= 0) || !(angle <= maxAngle)){
+				if( !(angle >= 0) || !(angle <= maxAngle)){ //checks to ensure the user inputed the correct angle with in certian bounds
 					JOptionPane.showMessageDialog(null, "Please enter a number between " + minAngle + " and " + maxAngle, "Invalid input", JOptionPane.INFORMATION_MESSAGE);
 					return;
 				}

@@ -71,7 +71,7 @@ public class DisplayPanel extends JPanel{
 	public void setLaunchPoints(ArrayList<Point> launchPoints) {
 		this.launchPoints = launchPoints;
 	}
-	public void launchMissile(){
+	public void launchMissile(){ //launches the missile and out puts a message if no angle is entered
 		if( launchPoints == null){
 			JOptionPane.showMessageDialog(null, "You must enter an angle before launching the missile!", "Invalid input", JOptionPane.INFORMATION_MESSAGE);
 			return;
@@ -107,7 +107,7 @@ public class DisplayPanel extends JPanel{
 		}
 	}
 	
-	private void shootHelper() {
+	private void shootHelper() { //does all the caclulations needed to shoot the missile
 		// more complex logic is probably needed to determine when to stop
 		if( currentMissile.isColliding(currentTarget) ){
 			currentIndex = 0;
