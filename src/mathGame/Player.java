@@ -1,12 +1,18 @@
 package mathGame;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 
 public class Player {
 	private int x;
 	private int y;
 	private String name;
+	private BufferedImage img = null;
 	
 	public Player(int x, int y, String name) {
 		super();
@@ -15,8 +21,14 @@ public class Player {
 		this.name = name;
 	}
 	public void draw( Graphics g ){
-		g.setColor(Color.BLACK);
-		g.fillRect(x, y, 5, 5);
+		try{
+			img = ImageIO.read(new File("src/images/"+name+"_player.png"));
+		}catch(IOException e){
+			System.out.println(e);
+		}
+		g.drawImage(img,  x,  y,  null);
+		//g.setColor(Color.BLACK);
+		//g.fillRect(x, y, 5, 5);
 	}
 	public int getX() {
 		return x;

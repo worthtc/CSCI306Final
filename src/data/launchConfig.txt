@@ -1,13 +1,13 @@
 800 800
-Missile:100:500
+Missile:175:475
 MissileType:Axe
 MissileType:Lightning Bolt
 MissileType:Arrow
-Person:50:500
+Person:0:425
 PersonType:Lumber Jack
 PersonType:Wizzzzzerd
 PersonType:Archer
-Target:700:500:100:100
+Target:700:450:100:150
 TargetType:Tree
 TargetType:Dragon
 TargetType:Target

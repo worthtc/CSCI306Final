@@ -1,8 +1,14 @@
 package mathGame;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 
 
 
@@ -13,6 +19,7 @@ public class Missile {
 	private double gravity;
 	private String name;
 	private ArrayList<Point> launchPoints;
+	private BufferedImage img = null;
 	public int getX() {
 		return x;
 	}
@@ -26,8 +33,14 @@ public class Missile {
 		this.y = y;
 	}
 	public void draw( Graphics g ){
-		g.setColor(Color.RED);
-		g.fillRect(x, y, 5, 5);
+		try{
+			img = ImageIO.read(new File("src/images/"+name+"_missile.png"));
+		}catch(IOException e){
+			System.out.println(e);
+		}
+		g.drawImage(img,  x-50,  y-25,  null);
+		//g.setColor(Color.RED);
+		//g.fillRect(x, y, 5, 5);
 	}
 	public boolean isColliding( Target boardTarget){
 		if (x >= boardTarget.getX() && x <= boardTarget.getX() + boardTarget.getWidth()){
