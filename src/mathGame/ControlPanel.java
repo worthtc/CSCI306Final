@@ -137,8 +137,8 @@ public class ControlPanel extends JPanel{
 					JOptionPane.showMessageDialog(null,"Please answer the question");
 					return;
 				}
-				//if(display.getScore()> 0 && (display.getScore()%10) == 0 && !hasAnswered){
-				if(display.getScore()> 0 && !hasAnswered){
+				if(display.getScore()> 0 && (display.getScore()%10) == 0 && !hasAnswered){
+				//if(display.getScore()> 0 && !hasAnswered){
 					hasAnswered = true;
 					Question askQ = controlGUI.askQuestion();
 		    		askQ.askYesNoQuestion();
